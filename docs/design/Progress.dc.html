@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Прогрес</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C93C12}a:hover{color:#9E2E0C}
+</style>
+</helmet>
+<div style="width:390px;height:1560px;box-sizing:border-box;background:#F4F4F1;color:#141414;font-family:'Exo 2',sans-serif;position:relative;overflow:hidden">
+<div style="padding:48px 20px 110px;display:flex;flex-direction:column;gap:12px">
+<h1 style="margin:0;font-size:30px;font-weight:800;letter-spacing:-0.5px">Прогрес</h1>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-size:24px;font-weight:800">64</span><span style="font-size:11px;color:#5E5E58">тренування</span></div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-size:24px;font-weight:800">71 год</span><span style="font-size:11px;color:#5E5E58">у залі</span></div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-size:24px;font-weight:800">412 т</span><span style="font-size:11px;color:#5E5E58">піднято</span></div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:16px;display:flex;align-items:center;gap:16px">
+<div style="position:relative;width:104px;height:104px;flex:none">
+<svg width="104" height="104" viewBox="0 0 104 104" role="img" aria-label="Виконано 90 відсотків запланованих тренувань">
+<circle cx="52" cy="52" r="40" fill="none" stroke="#E8E8E2" stroke-width="12"></circle>
+<circle cx="52" cy="52" r="40" fill="none" stroke="#C93C12" stroke-width="12" stroke-linecap="round" stroke-dasharray="226.2 251.33" transform="rotate(-90 52 52)"></circle>
+</svg>
+<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span style="font-size:22px;font-weight:800">90%</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<h2 style="margin:0;font-size:16px;font-weight:700">Виконання плану</h2>
+<span style="font-size:13px;color:#5E5E58;line-height:1.4">18 з 20 запланованих тренувань за 30 днів</span>
+<span style="display:flex;align-items:center;gap:4px;font-size:13px;font-weight:700"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.6 3.2 3 4.8 4.6 7 1.4 1.9 2.4 3.9 2.4 6.2C19 19 15.9 22 12 22s-7-3-7-6.8c0-2.4 1.2-4.4 2.8-5.9.2 1.6 1 2.8 2.2 3.4-.3-3.9 1-7.4 2-10.7z" fill="#C93C12"></path><path d="M12 12.5c1.6 1.6 3 3 3 5a3 3 0 0 1-6 0c0-1.3.7-2.3 1.6-3 .2.8.6 1.3 1.2 1.6-.1-1.4.1-2.6.2-3.6z" fill="#FFD3BF"></path></svg>Стрік 8 · рекорд 14</span>
+</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:baseline">
+<h2 style="margin:0;font-size:16px;font-weight:700">Активність</h2>
+<span style="font-size:12px;color:#5E5E58">останні 6 місяців</span>
+</div>
+<div style="display:grid;grid-template-rows:repeat(7,10px);grid-auto-flow:column;grid-auto-columns:10px;gap:3px">
+<sc-for list="{{heat}}" as="h" hint-placeholder-count="182"><span style="width:10px;height:10px;border-radius:2px;background:{{h}}"></span></sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#5E5E58">
+<span>трав</span><span>лип</span><span>вер</span><span style="display:flex;align-items:center;gap:3px">менше <span style="width:9px;height:9px;border-radius:2px;background:#EDEDE7"></span><span style="width:9px;height:9px;border-radius:2px;background:#F2C3B0"></span><span style="width:9px;height:9px;border-radius:2px;background:#E07D57"></span><span style="width:9px;height:9px;border-radius:2px;background:#C93C12"></span> більше</span>
+</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:baseline">
+<h2 style="margin:0;font-size:16px;font-weight:700">Тренування й об’єм по тижнях</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;align-items:end;height:118px">
+<sc-for list="{{weeks}}" as="w" hint-placeholder-count="12">
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="font-size:10px;font-weight:700;color:#5E5E58">{{w.c}}</span><div style="width:100%;height:{{w.h}};border-radius:4px;background:{{w.bg}}"></div></div>
+</sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#5E5E58"><span>серп</span><span>вер</span><span>жовт</span></div>
+<span style="font-size:12px;color:#5E5E58">Цифра над стовпчиком — кількість тренувань, висота — об’єм у тоннах</span>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h2 style="margin:0;font-size:16px;font-weight:700">Прогрес по вправі</h2>
+<button style="display:flex;align-items:center;gap:4px;border:1px solid #E1E1DB;background:#FFFFFF;border-radius:10px;padding:7px 10px;font:600 13px 'Exo 2',sans-serif;color:#141414">Присідання <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+</div>
+<div role="tablist" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:#F4F4F1;border-radius:10px;padding:3px">
+<button role="tab" aria-selected="true" style="border:0;border-radius:8px;background:#FFFFFF;padding:7px 0;font:700 12px 'Exo 2',sans-serif;color:#141414">Розрах. 1ПМ</button>
+<button role="tab" aria-selected="false" style="border:0;border-radius:8px;background:transparent;padding:7px 0;font:600 12px 'Exo 2',sans-serif;color:#5E5E58">Макс. вага</button>
+<button role="tab" aria-selected="false" style="border:0;border-radius:8px;background:transparent;padding:7px 0;font:600 12px 'Exo 2',sans-serif;color:#5E5E58">Об’єм</button>
+</div>
+<div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:26px;font-weight:800">128 кг</span><span style="font-size:13px;font-weight:700;color:#1F7A3A">+16 кг за 10 тижнів</span></div>
+<svg width="310" height="140" viewBox="0 0 320 140" role="img" aria-label="Розрахунковий 1ПМ у присіданні зріс із 112 до 128 кг">
+<line x1="20" y1="10" x2="310" y2="10" stroke="#EFEFEA" stroke-width="1"></line>
+<line x1="20" y1="65" x2="310" y2="65" stroke="#EFEFEA" stroke-width="1"></line>
+<line x1="20" y1="120" x2="310" y2="120" stroke="#E1E1DB" stroke-width="1"></line>
+<text x="0" y="14" font-size="10" fill="#5E5E58" font-family="Exo 2, sans-serif">130</text>
+<text x="0" y="69" font-size="10" fill="#5E5E58" font-family="Exo 2, sans-serif">120</text>
+<text x="0" y="124" font-size="10" fill="#5E5E58" font-family="Exo 2, sans-serif">110</text>
+<polyline points="30,109 60,98 90,103.5 120,81.5 150,76 180,59.5 210,65 240,43 270,32 300,21" fill="none" stroke="#C93C12" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<circle cx="300" cy="21" r="5" fill="#C93C12" stroke="#FFFFFF" stroke-width="2"></circle>
+<circle cx="240" cy="43" r="3.5" fill="#FFFFFF" stroke="#C93C12" stroke-width="2"></circle>
+<circle cx="150" cy="76" r="3.5" fill="#FFFFFF" stroke="#C93C12" stroke-width="2"></circle>
+<text x="30" y="136" font-size="10" fill="#5E5E58" font-family="Exo 2, sans-serif">12 серп</text>
+<text x="272" y="136" font-size="10" fill="#5E5E58" font-family="Exo 2, sans-serif">19 жовт</text>
+</svg>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:2px">
+<h2 style="margin:0 0 6px;font-size:16px;font-weight:700">Рекорди</h2>
+<sc-for list="{{prs}}" as="p" hint-placeholder-count="4">
+<div style="display:flex;align-items:center;gap:12px;height:52px;border-top:1px solid #EFEFEA">
+<div style="width:34px;height:34px;flex:none;border-radius:10px;background:#FBE9E2;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C93C12" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"></path><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"></path></svg></div>
+<div style="flex:1;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:700">{{p.ex}}</span><span style="font-size:12px;color:#5E5E58">{{p.kind}}</span></div>
+<div style="display:flex;flex-direction:column;align-items:flex-end"><span style="font-size:14px;font-weight:800">{{p.val}}</span><span style="font-size:11px;color:#5E5E58">{{p.date}}</span></div>
+</div>
+</sc-for>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;color:#5E5E58">Середня тривалість</span><span style="font-size:22px;font-weight:800">68 хв</span></div>
+<div style="display:flex;align-items:flex-end;gap:4px;height:40px">
+<sc-for list="{{dur}}" as="d" hint-placeholder-count="8"><div style="width:10px;height:{{d}};border-radius:3px;background:#141414"></div></sc-for>
+</div>
+<span style="font-size:13px;font-weight:700;color:#1F7A3A">−3 хв</span>
+</div>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:84px">
+<dc-import name="TabBar" active="prog" hint-size="390px,84px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1560}}'>
+class Component extends DCLogic {
+renderVals() {
+const lv = ['#EDEDE7', '#F2C3B0', '#E07D57', '#C93C12'];
+const heat = [];
+for (let i = 0; i < 182; i++) {
+const row = i % 7;
+if (i > 177) { heat.push('transparent'); continue; }
+let l = 0;
+if (row === 0 || row === 2 || row === 5) l = (i * 7) % 5 === 0 ? 0 : 1 + ((i * 13) % 3);
+else if ((i * 11) % 17 === 0) l = 1;
+heat.push(lv[l]);
+}
+const vol = [9.8, 10.4, 11.2, 4.1, 10.9, 11.8, 12.1, 9.5, 12.6, 13.0, 11.4, 12.4];
+const cnt = [3, 3, 4, 1, 3, 4, 4, 2, 4, 4, 3, 3];
+const weeks = vol.map((v, i) => ({ c: cnt[i], h: Math.round(v * 7) + 'px', bg: i === 11 ? '#C93C12' : '#141414' }));
+const prs = [
+{ ex: 'Присідання', kind: 'Максимальна вага', val: '110 кг × 5', date: '19 жовт' },
+{ ex: 'Жим лежачи', kind: 'Розрахунковий 1ПМ', val: '96 кг', date: '16 жовт' },
+{ ex: 'Підтягування', kind: 'Найбільше повторів', val: '+10 кг × 9', date: '13 жовт' },
+{ ex: 'Румунська тяга', kind: 'Об’єм за тренування', val: '3 840 кг', date: '6 жовт' }
+];
+const dur = [30, 34, 28, 36, 31, 26, 29, 27].map((h) => h + 'px');
+return { heat, weeks, prs, dur };
+}
+}
+</script>
+</body>
+</html>

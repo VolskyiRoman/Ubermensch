@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Нове тренування</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C93C12}a:hover{color:#9E2E0C}
+</style>
+</helmet>
+<div style="width:390px;height:1060px;box-sizing:border-box;background:#F4F4F1;color:#141414;font-family:'Exo 2',sans-serif;position:relative;overflow:hidden">
+<div style="padding:44px 20px 120px;display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<a href="Calendar.dc.html" aria-label="Закрити" style="width:40px;height:40px;border-radius:12px;border:1px solid #E1E1DB;background:#FFFFFF;color:#141414;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></a>
+<span style="font-size:17px;font-weight:800">Нове тренування</span>
+<span style="width:40px"></span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<div style="display:flex;flex-direction:column;gap:6px">
+<label for="nm" style="font-size:12px;font-weight:600;color:#5E5E58">Назва</label>
+<input id="nm" value="Ноги" style="height:46px;box-sizing:border-box;border:1px solid #E1E1DB;border-radius:12px;padding:0 12px;font:700 15px 'Exo 2',sans-serif;color:#141414;background:#FFFFFF">
+</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<span style="font-size:12px;font-weight:600;color:#5E5E58">Дата</span>
+<button style="height:46px;display:flex;align-items:center;gap:8px;border:1px solid #E1E1DB;border-radius:12px;padding:0 12px;font:700 15px 'Exo 2',sans-serif;color:#141414;background:#FFFFFF"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C93C12" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Ср, 21 жовт</button>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<span style="font-size:12px;font-weight:600;color:#5E5E58">Шаблон</span>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<button aria-pressed="true" style="border:0;background:#141414;color:#FFFFFF;border-radius:10px;padding:8px 12px;font:700 13px 'Exo 2',sans-serif">Ноги А</button>
+<button aria-pressed="false" style="border:1px solid #E1E1DB;background:#FFFFFF;color:#141414;border-radius:10px;padding:8px 12px;font:600 13px 'Exo 2',sans-serif">Груди і трицепс</button>
+<button aria-pressed="false" style="border:1px solid #E1E1DB;background:#FFFFFF;color:#141414;border-radius:10px;padding:8px 12px;font:600 13px 'Exo 2',sans-serif">Спина</button>
+<button aria-pressed="false" style="border:1px solid #E1E1DB;background:#FFFFFF;color:#141414;border-radius:10px;padding:8px 12px;font:600 13px 'Exo 2',sans-serif">Без шаблону</button>
+</div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;padding-top:4px">
+<h2 style="margin:0;font-size:16px;font-weight:700">Вправи</h2>
+<span style="font-size:12px;color:#5E5E58">4 вправи · ~70 хв</span>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:12px">
+<span style="width:28px;height:28px;flex:none;border-radius:8px;background:#F4F4F1;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">1</span>
+<div style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:700">Присідання зі штангою</span><span style="font-size:12px;color:#5E5E58">4 підходи · відпочинок 3:00</span></div>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8A84" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 9h14M5 15h14"></path></svg>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:16px;padding:12px 14px;display:flex;align-items:center;gap:12px">
+<span style="width:28px;height:28px;flex:none;border-radius:8px;background:#F4F4F1;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">2</span>
+<div style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:700">Румунська тяга</span><span style="font-size:12px;color:#5E5E58">3 підходи · відпочинок 2:30</span></div>
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A8A84" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 9h14M5 15h14"></path></svg>
+</div>
+<div style="background:#FBE9E2;border:1.5px dashed #C93C12;border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:8px">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<span style="font-size:12px;font-weight:800;color:#9E2E0C">СУПЕРСЕТ A · 3 кола</span>
+<span style="font-size:12px;font-weight:600;color:#9E2E0C">відпочинок після кола 2:00</span>
+</div>
+<div style="background:#FFFFFF;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:12px">
+<span style="width:28px;height:28px;flex:none;border-radius:8px;background:#C93C12;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800">A1</span>
+<div style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:700">Випади з гантелями</span><span style="font-size:12px;color:#5E5E58">без відпочинку → A2</span></div>
+</div>
+<div style="background:#FFFFFF;border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:12px">
+<span style="width:28px;height:28px;flex:none;border-radius:8px;background:#C93C12;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800">A2</span>
+<div style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:700">Підйоми на носки</span><span style="font-size:12px;color:#5E5E58">потім відпочинок</span></div>
+</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #141414;border-radius:16px;overflow:hidden;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;gap:10px;padding:0 14px;height:50px;border-bottom:1px solid #EFEFEA">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5E5E58" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+<label for="srch" style="position:absolute;left:-9999px">Пошук вправи</label>
+<input id="srch" placeholder="Додати вправу…" value="жим" style="flex:1;border:0;outline:none;font:600 15px 'Exo 2',sans-serif;color:#141414;background:transparent">
+</div>
+<sc-for list="{{opts}}" as="o" hint-placeholder-count="4">
+<button style="display:flex;align-items:center;justify-content:space-between;height:46px;padding:0 14px;border:0;border-bottom:1px solid #EFEFEA;background:#FFFFFF;text-align:left;font-family:'Exo 2',sans-serif;color:#141414">
+<span style="display:flex;flex-direction:column"><span style="font-size:14px;font-weight:600">{{o.n}}</span><span style="font-size:11px;color:#5E5E58">{{o.g}}</span></span>
+<span style="font-size:20px;font-weight:600;color:#C93C12">+</span>
+</button>
+</sc-for>
+<button style="height:46px;border:0;background:#FFFFFF;font:700 14px 'Exo 2',sans-serif;color:#C93C12">+ Створити свою вправу</button>
+</div>
+<button style="height:46px;border:1px dashed #8A8A84;background:transparent;border-radius:12px;font:700 14px 'Exo 2',sans-serif;color:#141414">Об’єднати вибрані в суперсет</button>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:4px 2px">
+<label for="sv" style="font-size:14px;font-weight:600">Зберегти як шаблон</label>
+<span style="position:relative;width:46px;height:28px;border-radius:999px;background:#C8C8C0;flex:none"><input id="sv" type="checkbox" style="position:absolute;inset:0;opacity:0;margin:0"><span style="position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#FFFFFF"></span></span>
+</div>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:0;padding:12px 20px 30px;background:#F4F4F1;border-top:1px solid #E1E1DB">
+<a href="Calendar.dc.html" style="display:block;text-align:center;text-decoration:none;background:#C93C12;color:#FFFFFF;border-radius:14px;padding:15px;font-size:16px;font-weight:700">Призначити на 21 жовтня</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1060}}'>
+class Component extends DCLogic {
+renderVals() {
+const opts = [
+{ n: 'Жим ногами', g: 'Ноги · тренажер' },
+{ n: 'Жим лежачи', g: 'Груди · штанга' },
+{ n: 'Жим гантелей сидячи', g: 'Плечі · гантелі' },
+{ n: 'Французький жим', g: 'Трицепс · штанга' }
+];
+return { opts };
+}
+}
+</script>
+</body>
+</html>

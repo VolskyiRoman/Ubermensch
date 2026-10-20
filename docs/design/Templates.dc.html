@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Шаблони</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C93C12}a:hover{color:#9E2E0C}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#F4F4F1;color:#141414;font-family:'Exo 2',sans-serif;position:relative;overflow:hidden">
+<div style="padding:44px 20px 110px;display:flex;flex-direction:column;gap:12px">
+<a href="Profile.dc.html" style="display:flex;align-items:center;gap:4px;text-decoration:none;font-size:14px;font-weight:600;height:32px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Профіль</a>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h1 style="margin:0;font-size:30px;font-weight:800;letter-spacing:-0.5px">Шаблони</h1>
+<button aria-label="Новий шаблон" style="width:44px;height:44px;border:0;border-radius:12px;background:#C93C12;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:24px 18px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;margin-top:20px">
+<svg width="160" height="130" viewBox="0 0 160 130" role="img" aria-label="Порожній планшет для нотаток зі знаком плюс">
+<circle cx="80" cy="66" r="58" fill="#F4F4F1"></circle>
+<rect x="46" y="22" width="68" height="92" rx="10" fill="#FFFFFF" stroke="#141414" stroke-width="2.5"></rect>
+<rect x="64" y="14" width="32" height="16" rx="5" fill="#141414"></rect>
+<rect x="58" y="44" width="44" height="7" rx="3.5" fill="#E8E8E2"></rect>
+<rect x="58" y="59" width="32" height="7" rx="3.5" fill="#E8E8E2"></rect>
+<rect x="58" y="74" width="38" height="7" rx="3.5" fill="#E8E8E2"></rect>
+<circle cx="114" cy="102" r="17" fill="#C93C12"></circle>
+<path d="M114 94v16M106 102h16" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"></path>
+</svg>
+<span style="font-size:17px;font-weight:800">Шаблонів ще немає</span>
+<span style="font-size:13px;color:#5E5E58;line-height:1.45;max-width:290px">Створи шаблон вручну або збережи вдале тренування одним дотиком після його завершення.</span>
+<button style="margin-top:6px;border:0;background:#C93C12;color:#FFFFFF;border-radius:12px;padding:12px 18px;font:700 14px 'Exo 2',sans-serif">Створити шаблон</button>
+</div>
+</sc-if>
+<sc-for list="{{tpls}}" as="t" hint-placeholder-count="4">
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:2px">
+<span style="font-size:17px;font-weight:800">{{t.name}}</span>
+<span style="font-size:12px;color:#5E5E58">{{t.meta}}</span>
+</div>
+<a href="NewWorkout.dc.html" style="text-decoration:none;border:1px solid #141414;border-radius:10px;padding:7px 10px;font-size:13px;font-weight:700;color:#141414">Призначити</a>
+</div>
+<span style="font-size:13px;color:#141414;line-height:1.45">{{t.list}}</span>
+</div>
+</sc-for>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:84px">
+<dc-import name="TabBar" active="prof" hint-size="390px,84px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"empty":{"editor":"boolean","default":false},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+renderVals() {
+const tpls = [
+{ name: 'Ноги А', meta: '6 вправ · 1 суперсет · востаннє 19 жовт', list: 'Присідання · Румунська тяга · Жим ногами · Випади + підйоми на носки · Згинання ніг' },
+{ name: 'Груди і трицепс', meta: '5 вправ · востаннє 17 жовт', list: 'Жим лежачи · Жим під кутом · Віджимання на брусах · Розведення · Французький жим' },
+{ name: 'Спина і біцепс', meta: '5 вправ · 1 суперсет · востаннє 15 жовт', list: 'Підтягування · Тяга штанги · Тяга блоку + пуловер · Згинання на біцепс' },
+{ name: 'Фулбоді', meta: '4 вправи · востаннє 3 жовт', list: 'Станова тяга · Жим стоячи · Тяга гантелі · Планка' }
+];
+const empty = this.props.empty === true || this.props.empty === 'true';
+return { tpls: empty ? [] : tpls, empty };
+}
+}
+</script>
+</body>
+</html>

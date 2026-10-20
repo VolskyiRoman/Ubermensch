@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Таббар</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<nav aria-label="Основна навігація" style="width:390px;height:84px;box-sizing:border-box;background:#FFFFFF;border-top:1px solid #E1E1DB;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:8px 6px 24px;font-family:'Exo 2',sans-serif;color:#141414">
+<a href="Dashboard.dc.html" style="text-decoration:none;color:{{col.dash}};font-weight:{{wt.dash}};display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="2"></rect><rect x="14" y="3" width="7" height="5" rx="2"></rect><rect x="14" y="12" width="7" height="9" rx="2"></rect><rect x="3" y="16" width="7" height="5" rx="2"></rect></svg>Дашборд</a>
+<a href="Calendar.dc.html" style="text-decoration:none;color:{{col.cal}};font-weight:{{wt.cal}};display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Календар</a>
+<a href="Progress.dc.html" style="text-decoration:none;color:{{col.prog}};font-weight:{{wt.prog}};display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"></path><path d="M6 17v-5"></path><path d="M11 17V6"></path><path d="M16 17v-8"></path><path d="M20 17v-3"></path></svg>Прогрес</a>
+<a href="Habits.dc.html" style="text-decoration:none;color:{{col.hab}};font-weight:{{wt.hab}};display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.7 2.7L16 9.5"></path></svg>Звички</a>
+<a href="Profile.dc.html" style="text-decoration:none;color:{{col.prof}};font-weight:{{wt.prof}};display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>Профіль</a>
+</nav>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"active":{"editor":"enum","options":["dash","cal","prog","hab","prof"],"default":"dash"},"$preview":{"width":390,"height":84}}'>
+class Component extends DCLogic {
+renderVals() {
+const a = this.props.active ?? 'dash';
+const keys = ['dash','cal','prog','hab','prof'];
+const col = {}, wt = {};
+keys.forEach((k) => { col[k] = k === a ? '#C93C12' : '#5E5E58'; wt[k] = k === a ? 700 : 600; });
+return { col, wt };
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Календар</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C93C12}a:hover{color:#9E2E0C}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#F4F4F1;color:#141414;font-family:'Exo 2',sans-serif;position:relative;overflow:hidden">
+<div style="padding:48px 20px 110px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h1 style="margin:0;font-size:30px;font-weight:800;letter-spacing:-0.5px">Календар</h1>
+<a href="NewWorkout.dc.html" aria-label="Призначити тренування" style="width:44px;height:44px;border-radius:12px;background:#C93C12;color:#FFFFFF;display:flex;align-items:center;justify-content:center;text-decoration:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></a>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:14px 12px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:0 4px">
+<button aria-label="Попередній місяць" style="width:36px;height:36px;border:1px solid #E1E1DB;background:#FFFFFF;border-radius:10px;color:#141414;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<span style="font-size:17px;font-weight:800">Жовтень 2026</span>
+<button aria-label="Наступний місяць" style="width:36px;height:36px;border:1px solid #E1E1DB;background:#FFFFFF;border-radius:10px;color:#141414;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center">
+<sc-for list="{{wd}}" as="w" hint-placeholder-count="7"><span style="font-size:11px;font-weight:600;color:#5E5E58;padding:4px 0">{{w}}</span></sc-for>
+<sc-for list="{{days}}" as="d" hint-placeholder-count="35">
+<div style="height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">
+<button onClick="{{d.pick}}" disabled="{{d.off}}" aria-label="{{d.aria}}" style="width:36px;height:36px;box-sizing:border-box;border:{{d.bd}};border-radius:10px;font:{{d.fw}} 14px 'Exo 2',sans-serif;background:{{d.bg}};color:{{d.fg}};outline:{{d.ol}};outline-offset:2px;cursor:pointer;padding:0">{{d.n}}</button>
+<span style="width:14px;height:2px;border-radius:1px;background:{{d.sel}}"></span>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;font-size:11px;color:#5E5E58;padding-top:2px">
+<span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:4px;background:#E2F1E6;border:1px solid #A9D6B5;box-sizing:border-box"></span>Виконано</span>
+<span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:4px;background:#FBE9E2;border:1px solid #F2C3B0;box-sizing:border-box"></span>Заплановано</span>
+<span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:4px;background:#D92020"></span>Пропущено</span>
+<span style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:4px;border:2px solid #C93C12;box-sizing:border-box"></span>Сьогодні</span>
+</div>
+</div>
+<span style="font-size:13px;font-weight:700;color:#5E5E58;padding:4px 4px 0">{{selLabel}}</span>
+<sc-if value="{{hasWorkout}}" hint-placeholder-val="{{ true }}">
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:2px">
+<span style="font-size:12px;font-weight:700;color:{{w.stc}}">{{w.status}}</span>
+<span style="font-size:20px;font-weight:800">{{w.name}}</span>
+<span style="font-size:12px;color:#5E5E58">{{w.meta}}</span>
+</div>
+<button aria-label="Редагувати тренування" style="width:36px;height:36px;border:1px solid #E1E1DB;background:#FFFFFF;border-radius:10px;color:#141414;display:flex;align-items:center;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"></path></svg></button>
+</div>
+<span style="font-size:13px;line-height:1.45">{{w.list}}</span>
+</div>
+</sc-if>
+<sc-if value="{{noWorkout}}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
+<svg width="160" height="104" viewBox="0 0 160 112" role="img" aria-label="Гантель спить на подушці">
+<rect x="20" y="74" width="120" height="30" rx="15" fill="#FBE9E2"></rect>
+<rect x="30" y="80" width="100" height="4" rx="2" fill="#F2C3B0"></rect>
+<rect x="46" y="62" width="68" height="8" rx="4" fill="#141414"></rect>
+<rect x="34" y="48" width="14" height="34" rx="4" fill="#C93C12"></rect>
+<rect x="112" y="48" width="14" height="34" rx="4" fill="#C93C12"></rect>
+<path d="M37 60q4 3 8 0M115 60q4 3 8 0" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></path>
+<text x="126" y="38" font-family="Exo 2, sans-serif" font-size="18" font-weight="800" fill="#141414">Z</text>
+<text x="140" y="24" font-family="Exo 2, sans-serif" font-size="13" font-weight="800" fill="#141414">z</text>
+<text x="149" y="13" font-family="Exo 2, sans-serif" font-size="10" font-weight="800" fill="#141414">z</text>
+</svg>
+<span style="font-size:17px;font-weight:800">День відпочинку</span>
+<span style="font-size:13px;color:#5E5E58;line-height:1.45;max-width:280px">Тренувань на цей день немає. М’язи теж ростуть, поки ти відпочиваєш.</span>
+<a href="NewWorkout.dc.html" style="margin-top:4px;text-decoration:none;border:1px solid #141414;border-radius:12px;padding:10px 16px;font-size:14px;font-weight:700;color:#141414">Призначити тренування</a>
+</div>
+</sc-if>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:84px">
+<dc-import name="TabBar" active="cal" hint-size="390px,84px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"selected":{"editor":"int","default":21,"min":1,"max":31},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { sel: null };
+}
+renderVals() {
+const sel = this.state.sel ?? Number(this.props.selected ?? 21);
+const wd = ['Пн','Вт','Ср','Чт','Пт','Сб','Нд'];
+const today = 21;
+const done = [1,3,6,8,10,13,15,17,20];
+const missed = [11];
+const planned = [21,23,25,28,30];
+const plans = {
+21: { name: 'Ноги', meta: 'Шаблон «Ноги А» · 6 вправ · ~70 хв', list: 'Присідання · Румунська тяга · Жим ногами · Суперсет: випади + підйоми на носки · Згинання ніг' },
+23: { name: 'Груди і трицепс', meta: 'Шаблон · 5 вправ · ~60 хв', list: 'Жим лежачи · Жим під кутом · Бруси · Розведення · Французький жим' },
+25: { name: 'Спина і біцепс', meta: 'Шаблон · 5 вправ · ~60 хв', list: 'Підтягування · Тяга штанги · Суперсет: тяга блоку + пуловер · Біцепс' },
+28: { name: 'Ноги', meta: 'Шаблон «Ноги А» · 6 вправ', list: 'Присідання · Румунська тяга · Жим ногами · Випади + носки · Згинання ніг' },
+30: { name: 'Фулбоді', meta: 'Шаблон · 4 вправи', list: 'Станова тяга · Жим стоячи · Тяга гантелі · Планка' }
+};
+const blank = { n: '', bg: 'transparent', fg: '#141414', fw: 400, ol: '0', bd: '0', sel: 'transparent', off: true, aria: '', pick: () => {} };
+const days = [blank, blank, blank];
+for (let n = 1; n <= 31; n++) {
+let bg = 'transparent', fg = n < today ? '#141414' : '#5E5E58', fw = 600, st = '', bd = '0';
+if (done.includes(n)) { bg = '#E2F1E6'; fg = '#1B6B36'; fw = 700; st = ', виконано'; }
+if (missed.includes(n)) { bg = '#D92020'; fg = '#FFFFFF'; fw = 700; st = ', пропущено'; }
+if (planned.includes(n)) { bg = '#FBE9E2'; fg = '#9E2E0C'; fw = 700; st = ', заплановано'; }
+days.push({ n: String(n), bg, fg, fw, bd, ol: n === today ? '2px solid #C93C12' : '0', sel: n === sel ? '#141414' : 'transparent', off: false, aria: n + ' жовтня' + st, pick: () => this.setState({ sel: n }) });
+}
+while (days.length % 7) days.push(blank);
+const names = ['неділя','понеділок','вівторок','середа','четвер','пʼятниця','субота'];
+const wdName = names[(sel + 3) % 7];
+const cap = wdName.charAt(0).toUpperCase() + wdName.slice(1);
+const selLabel = sel === today ? 'Сьогодні, ' + wdName + ', ' + sel + ' жовтня' : cap + ', ' + sel + ' жовтня';
+let w = null;
+if (plans[sel]) w = { ...plans[sel], status: sel === today ? 'ЗАПЛАНОВАНО НА СЬОГОДНІ' : 'ЗАПЛАНОВАНО', stc: '#C93C12' };
+else if (done.includes(sel)) w = { name: 'Тренування виконано', meta: 'тривалість 1:08 · об’єм 7,9 т', list: 'Деталі й статистика відкриваються з цієї картки', status: 'ВИКОНАНО', stc: '#1B6B36' };
+else if (missed.includes(sel)) w = { name: 'Спина і біцепс', meta: 'тренування не запускали', list: 'Можна перенести на інший день', status: 'ПРОПУЩЕНО', stc: '#C21B1B' };
+return { wd, days, selLabel, w: w || {}, hasWorkout: !!w, noWorkout: !w };
+}
+}
+</script>
+</body>
+</html>

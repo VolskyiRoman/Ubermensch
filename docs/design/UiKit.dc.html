@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>UI kit</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C93C12}a:hover{color:#9E2E0C}
+</style>
+</helmet>
+<div style="width:1440px;height:1780px;box-sizing:border-box;background:#F4F4F1;color:#141414;font-family:'Exo 2',sans-serif;padding:56px 64px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;justify-content:space-between;align-items:flex-end">
+<div style="display:flex;flex-direction:column;gap:6px">
+<span style="font-size:13px;font-weight:700;color:#5E5E58;letter-spacing:1px">ТЕМА 8 · СВІТЛИЙ СПОРТ</span>
+<h1 style="margin:0;font-size:44px;font-weight:800;letter-spacing:-1px">UI kit</h1>
+</div>
+<span style="font-size:14px;color:#5E5E58">Шрифт Exo 2 · базова сітка 4 px · екран 390 px, поля 20 px</span>
+</div>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:20px;font-weight:800">Кольори</h2>
+<div style="display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:12px">
+<sc-for list="{{colors}}" as="c" hint-placeholder-count="18">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="height:72px;border-radius:14px;background:{{c.hex}};border:1px solid #E1E1DB;display:flex;align-items:flex-end;padding:8px;box-sizing:border-box"><span style="font-size:11px;font-weight:700;color:{{c.fg}}">{{c.hex}}</span></div>
+<span style="font-size:13px;font-weight:700">{{c.name}}</span>
+<span style="font-size:11px;color:#5E5E58;font-family:monospace">{{c.token}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+
+<div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px">
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:20px;font-weight:800">Типографіка</h2>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:8px 20px;display:flex;flex-direction:column">
+<sc-for list="{{type}}" as="t" hint-placeholder-count="9">
+<div style="display:grid;grid-template-columns:150px 120px 1fr;align-items:center;min-height:52px;border-bottom:1px solid #EFEFEA;gap:12px">
+<span style="font-size:13px;font-weight:700">{{t.name}}</span>
+<span style="font-size:12px;color:#5E5E58;font-family:monospace">{{t.spec}}</span>
+<span style="font-size:{{t.size}};font-weight:{{t.w}};color:{{t.color}};line-height:1.2">{{t.sample}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:20px;font-weight:800">Відступи й радіуси</h2>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:20px">
+<div style="display:flex;align-items:flex-end;gap:14px">
+<sc-for list="{{space}}" as="s" hint-placeholder-count="7">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:{{s.px}};height:{{s.px}};background:#F2C3B0;border-radius:3px"></div><span style="font-size:11px;color:#5E5E58">{{s.n}}</span></div>
+</sc-for>
+</div>
+<div style="display:flex;align-items:flex-end;gap:14px">
+<sc-for list="{{radii}}" as="r" hint-placeholder-count="6">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:56px;height:56px;border:2px solid #141414;border-radius:{{r.px}};box-sizing:border-box"></div><span style="font-size:11px;color:#5E5E58;text-align:center">{{r.n}}</span></div>
+</sc-for>
+</div>
+</div>
+<h2 style="margin:8px 0 0;font-size:20px;font-weight:800">Іконка стріку</h2>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:20px;display:flex;align-items:flex-end;gap:28px">
+<sc-for list="{{flames}}" as="f" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+<svg width="{{f}}" height="{{f}}" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.6 3.2 3 4.8 4.6 7 1.4 1.9 2.4 3.9 2.4 6.2C19 19 15.9 22 12 22s-7-3-7-6.8c0-2.4 1.2-4.4 2.8-5.9.2 1.6 1 2.8 2.2 3.4-.3-3.9 1-7.4 2-10.7z" fill="#C93C12"></path><path d="M12 12.5c1.6 1.6 3 3 3 5a3 3 0 0 1-6 0c0-1.3.7-2.3 1.6-3 .2.8.6 1.3 1.2 1.6-.1-1.4.1-2.6.2-3.6z" fill="#FFD3BF"></path></svg>
+<span style="font-size:11px;color:#5E5E58">{{f}} px</span>
+</div>
+</sc-for>
+<span style="font-size:12px;color:#5E5E58;line-height:1.45;max-width:220px">Два шари: зовнішнє полум’я — акцент, внутрішнє — #FFD3BF. Завжди поруч із числом стріку.</span>
+</div>
+</section>
+</div>
+
+<section style="display:flex;flex-direction:column;gap:14px">
+<h2 style="margin:0;font-size:20px;font-weight:800">Компоненти</h2>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px">
+
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<span style="font-size:12px;font-weight:700;color:#5E5E58">КНОПКИ</span>
+<button style="border:0;background:#C93C12;color:#FFFFFF;border-radius:14px;padding:15px;font:700 16px 'Exo 2',sans-serif">Основна · Почати тренування</button>
+<button style="border:0;background:#9E2E0C;color:#FFFFFF;border-radius:14px;padding:15px;font:700 16px 'Exo 2',sans-serif">Основна · натиснута</button>
+<button style="border:1px solid #141414;background:#FFFFFF;color:#141414;border-radius:14px;padding:14px;font:700 15px 'Exo 2',sans-serif">Другорядна · Завершити вправу</button>
+<button style="border:0;background:#141414;color:#FFFFFF;border-radius:14px;padding:14px;font:700 15px 'Exo 2',sans-serif">Темна · Готово</button>
+<div style="display:flex;align-items:center;gap:10px">
+<button aria-label="Додати" style="width:44px;height:44px;border:0;border-radius:12px;background:#C93C12;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+<button aria-label="Назад" style="width:40px;height:40px;border:1px solid #E1E1DB;border-radius:12px;background:#FFFFFF;color:#141414;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg></button>
+<button style="border:0;background:transparent;padding:8px 6px;font:700 14px 'Exo 2',sans-serif;color:#C93C12">Текстова</button>
+<button disabled style="border:0;background:#E8E8E2;color:#8A8A84;border-radius:12px;padding:12px 14px;font:700 14px 'Exo 2',sans-serif">Вимкнена</button>
+</div>
+</div>
+
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:12px;font-weight:700;color:#5E5E58">ВИБІР І ВВЕДЕННЯ</span>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<span style="background:#141414;color:#FFFFFF;border-radius:10px;padding:8px 12px;font-size:13px;font-weight:700">Чип вибраний</span>
+<span style="border:1px solid #E1E1DB;border-radius:10px;padding:8px 12px;font-size:13px;font-weight:600">Чип</span>
+<span style="background:#FBE9E2;color:#9E2E0C;border-radius:8px;padding:5px 8px;font-size:12px;font-weight:600">Тег суперсету</span>
+<span style="background:#F4F4F1;border-radius:8px;padding:5px 8px;font-size:12px">Тег вправи</span>
+</div>
+<div style="display:flex;align-items:center;gap:16px">
+<span style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="width:24px;height:24px;border-radius:7px;border:2px solid #C8C8C0;box-sizing:border-box"></span>Не відмічено</span>
+<span style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="width:24px;height:24px;border-radius:7px;background:#C93C12;display:flex;align-items:center;justify-content:center"><svg width="13" height="13" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>Виконано</span>
+</div>
+<div style="display:flex;align-items:center;gap:16px">
+<span style="position:relative;width:46px;height:28px;border-radius:999px;background:#C93C12"><span style="position:absolute;top:3px;left:21px;width:22px;height:22px;border-radius:50%;background:#FFFFFF"></span></span>
+<span style="position:relative;width:46px;height:28px;border-radius:999px;background:#C8C8C0"><span style="position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#FFFFFF"></span></span>
+<div style="display:flex;align-items:center;gap:6px"><span style="width:32px;height:32px;border:1px solid #E1E1DB;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700">−</span><span style="font-size:15px;font-weight:800;min-width:38px;text-align:center">3:00</span><span style="width:32px;height:32px;border:1px solid #E1E1DB;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700">+</span></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<span style="font-size:12px;font-weight:600;color:#5E5E58">Поле</span>
+<span style="height:46px;box-sizing:border-box;border:1px solid #E1E1DB;border-radius:12px;padding:0 12px;display:flex;align-items:center;font-size:15px;font-weight:700">Ноги</span>
+<span style="height:46px;box-sizing:border-box;border:1px solid #141414;border-radius:12px;padding:0 12px;display:flex;align-items:center;font-size:15px;color:#5E5E58">Поле у фокусі…</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<div style="border:1px solid #E1E1DB;border-radius:18px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px"><span style="font-size:11px;font-weight:700;color:#5E5E58">ВАГА, КГ</span><span style="font-size:34px;font-weight:800;line-height:1">100</span><div style="display:flex;gap:6px;width:100%"><span style="flex:1;height:36px;border-radius:10px;background:#F4F4F1;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px">−2,5</span><span style="flex:1;height:36px;border-radius:10px;background:#F4F4F1;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px">+2,5</span></div></div>
+<div style="display:flex;flex-direction:column;justify-content:center;gap:4px;font-size:12px;color:#5E5E58;line-height:1.4">Великий степер для ваги й повторів. Кнопки 44 px заввишки на екрані.</div>
+</div>
+</div>
+
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px">
+<span style="font-size:12px;font-weight:700;color:#5E5E58">КАЛЕНДАР І ПРОГРЕС</span>
+<div style="display:flex;gap:14px;align-items:center">
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="width:36px;height:36px;border-radius:10px;background:#E2F1E6;color:#1B6B36;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center">6</span><span style="font-size:10px;color:#5E5E58">виконано</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="width:36px;height:36px;border-radius:10px;background:#D92020;color:#FFFFFF;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center">11</span><span style="font-size:10px;color:#5E5E58">пропущено</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="width:36px;height:36px;border-radius:10px;background:#FBE9E2;color:#9E2E0C;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center">23</span><span style="font-size:10px;color:#5E5E58">заплановано</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="width:36px;height:36px;border-radius:10px;background:#FBE9E2;color:#9E2E0C;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;outline:2px solid #C93C12;outline-offset:2px">21</span><span style="font-size:10px;color:#5E5E58">сьогодні</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="width:36px;height:36px;border-radius:10px;color:#5E5E58;font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center">27</span><span style="font-size:10px;color:#5E5E58">порожній</span></div>
+</div>
+<div style="display:flex;align-items:center;gap:16px">
+<div style="position:relative;width:96px;height:96px;flex:none">
+<svg width="96" height="96" viewBox="0 0 140 140" role="img" aria-label="Кругова діаграма дня">
+<g transform="rotate(-90 70 70)">
+<circle cx="70" cy="70" r="52" fill="none" stroke="#E8E8E2" stroke-width="16" stroke-dasharray="37.84 288.89" stroke-dashoffset="0"></circle>
+<circle cx="70" cy="70" r="52" fill="none" stroke="#141414" stroke-width="16" stroke-dasharray="37.84 288.89" stroke-dashoffset="-40.84"></circle>
+<circle cx="70" cy="70" r="52" fill="none" stroke="#141414" stroke-width="16" stroke-dasharray="37.84 288.89" stroke-dashoffset="-81.68"></circle>
+<circle cx="70" cy="70" r="52" fill="none" stroke="#E8E8E2" stroke-width="16" stroke-dasharray="37.84 288.89" stroke-dashoffset="-122.52"></circle>
+<circle cx="70" cy="70" r="52" fill="none" stroke="#D98A1C" stroke-width="16" stroke-dasharray="37.84 288.89" stroke-dashoffset="-163.36"></circle>
+<circle cx="70" cy="70" r="52" fill="none" stroke="#D98A1C" stroke-width="16" stroke-dasharray="37.84 288.89" stroke-dashoffset="-204.2"></circle>
+<circle cx="70" cy="70" r="52" fill="none" stroke="#E8E8E2" stroke-width="16" stroke-dasharray="37.84 288.89" stroke-dashoffset="-245.04"></circle>
+<circle cx="70" cy="70" r="52" fill="none" stroke="#3B6EA8" stroke-width="16" stroke-dasharray="37.84 288.89" stroke-dashoffset="-285.88"></circle>
+</g>
+</svg>
+<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center"><span style="font-size:20px;font-weight:800">5/8</span></div>
+</div>
+<span style="font-size:12px;color:#5E5E58;line-height:1.45">Кругова діаграма дня: сегмент на кожен пункт, колір категорії для виконаного, #E8E8E2 для решти. Проміжок 3 px.</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px">
+<span style="height:5px;border-radius:3px;background:#C93C12"></span><span style="height:5px;border-radius:3px;background:#C93C12"></span><span style="height:5px;border-radius:3px;background:#E1E1DB"></span><span style="height:5px;border-radius:3px;background:#E1E1DB"></span>
+</div>
+<div style="display:flex;align-items:flex-end;gap:6px;height:56px">
+<div style="flex:1;height:40px;border-radius:4px;background:#C93C12"></div><div style="flex:1;height:4px;border-radius:4px;background:#E8E8E2"></div><div style="flex:1;height:52px;border-radius:4px;background:#141414"></div><div style="flex:1;height:30px;border-radius:4px;background:#C93C12"></div>
+<div style="display:grid;grid-template-columns:repeat(4,10px);grid-template-rows:repeat(3,10px);gap:3px;margin-left:12px"><span style="background:#EDEDE7;border-radius:2px"></span><span style="background:#F2C3B0;border-radius:2px"></span><span style="background:#E07D57;border-radius:2px"></span><span style="background:#C93C12;border-radius:2px"></span><span style="background:#C93C12;border-radius:2px"></span><span style="background:#EDEDE7;border-radius:2px"></span><span style="background:#F2C3B0;border-radius:2px"></span><span style="background:#EDEDE7;border-radius:2px"></span><span style="background:#E07D57;border-radius:2px"></span><span style="background:#EDEDE7;border-radius:2px"></span><span style="background:#C93C12;border-radius:2px"></span><span style="background:#F2C3B0;border-radius:2px"></span></div>
+</div>
+</div>
+
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<span style="font-size:12px;font-weight:700;color:#5E5E58">КАРТКИ</span>
+<div style="background:#FFFFFF;border:1px solid #C93C12;border-radius:22px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center">
+<div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:14px;font-weight:700;color:#C93C12">Ідеальний день</span><span style="font-size:12px;font-weight:600">Рекорд: 21 день</span></div>
+<div style="display:flex;align-items:center;gap:6px"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.6 3.2 3 4.8 4.6 7 1.4 1.9 2.4 3.9 2.4 6.2C19 19 15.9 22 12 22s-7-3-7-6.8c0-2.4 1.2-4.4 2.8-5.9.2 1.6 1 2.8 2.2 3.4-.3-3.9 1-7.4 2-10.7z" fill="#C93C12"></path><path d="M12 12.5c1.6 1.6 3 3 3 5a3 3 0 0 1-6 0c0-1.3.7-2.3 1.6-3 .2.8.6 1.3 1.2 1.6-.1-1.4.1-2.6.2-3.6z" fill="#FFD3BF"></path></svg><span style="font-size:40px;font-weight:800;line-height:1;color:#C93C12">12</span></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+<div style="border:1px solid #E1E1DB;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:6px"><span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600"><span style="width:8px;height:8px;border-radius:50%;background:#141414"></span>Звички</span><span style="display:flex;justify-content:space-between;align-items:flex-end"><span style="font-size:24px;font-weight:800;line-height:1">2/3</span><span style="font-size:13px;font-weight:700">15</span></span></div>
+<div style="border:1px solid #E1E1DB;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:2px"><span style="font-size:22px;font-weight:800">64</span><span style="font-size:11px;color:#5E5E58">тренування</span></div>
+</div>
+<div style="background:#141414;color:#FFFFFF;border-radius:20px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center"><div style="display:flex;flex-direction:column"><span style="font-size:12px;color:#B9B9B2">Тренування сьогодні</span><span style="font-size:18px;font-weight:800">Ноги</span></div><span style="background:#C93C12;border-radius:10px;padding:8px 12px;font-size:13px;font-weight:700">Почати</span></div>
+</div>
+
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<span style="font-size:12px;font-weight:700;color:#5E5E58">РЯДКИ СПИСКІВ</span>
+<div style="display:flex;align-items:center;gap:12px;height:52px;border-bottom:1px solid #EFEFEA"><span style="width:28px;height:28px;border-radius:8px;background:#F4F4F1;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">1</span><span style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:700">Присідання зі штангою</span><span style="font-size:12px;color:#5E5E58">4 підходи · відпочинок 3:00</span></span></div>
+<div style="display:flex;align-items:center;gap:12px;height:52px;border-bottom:1px solid #EFEFEA"><span style="width:28px;height:28px;border-radius:8px;background:#C93C12;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800">A1</span><span style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:700">Вправа в суперсеті</span><span style="font-size:12px;color:#5E5E58">без відпочинку → A2</span></span></div>
+<div style="display:grid;grid-template-columns:44px 1fr 70px 50px;align-items:center;height:42px;border-bottom:1px solid #EFEFEA;font-size:14px"><span style="font-weight:800">2</span><span style="font-weight:700">100 кг × 8</span><span style="color:#5E5E58">0:51</span><span style="text-align:right;font-weight:700">✓</span></div>
+<div style="display:flex;align-items:center;gap:12px;height:52px"><span style="width:34px;height:34px;border-radius:10px;background:#FBE9E2;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C93C12" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"></path><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"></path></svg></span><span style="flex:1;display:flex;flex-direction:column"><span style="font-size:14px;font-weight:700">Рекорд</span><span style="font-size:12px;color:#5E5E58">розрах. 1ПМ</span></span><span style="font-size:14px;font-weight:800">128 кг</span></div>
+</div>
+
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:12px">
+<span style="font-size:12px;font-weight:700;color:#5E5E58">ТАББАР І ТАЙМЕРИ</span>
+<dc-import name="TabBar" active="dash" hint-size="390px,84px"></dc-import>
+<div style="display:flex;gap:16px;align-items:center">
+<div style="background:#141414;color:#FFFFFF;border-radius:18px;padding:14px 18px;display:flex;flex-direction:column;align-items:center;gap:2px"><span style="font-size:11px;font-weight:700;color:#FFB59B">Підхід триває</span><span style="font-size:34px;font-weight:800;line-height:1">00:42</span></div>
+<div style="position:relative;width:96px;height:96px"><svg width="96" height="96" viewBox="0 0 260 260" role="img" aria-label="Таймер відпочинку"><circle cx="130" cy="130" r="110" fill="none" stroke="#E8E8E2" stroke-width="18"></circle><circle cx="130" cy="130" r="110" fill="none" stroke="#C93C12" stroke-width="18" stroke-linecap="round" stroke-dasharray="514.6 691.15" transform="rotate(-90 130 130)"></circle></svg><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800">2:14</div></div>
+</div>
+</div>
+
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1780}}'>
+class Component extends DCLogic {
+renderVals() {
+const W = '#FFFFFF', D = '#141414';
+const colors = [
+{ name: 'Фон', token: 'bg', hex: '#F4F4F1', fg: D },
+{ name: 'Поверхня', token: 'surface', hex: '#FFFFFF', fg: D },
+{ name: 'Межа', token: 'border', hex: '#E1E1DB', fg: D },
+{ name: 'Розділювач', token: 'divider', hex: '#EFEFEA', fg: D },
+{ name: 'Порожнє', token: 'track', hex: '#E8E8E2', fg: D },
+{ name: 'Неактивне', token: 'inactive', hex: '#C8C8C0', fg: D },
+{ name: 'Текст', token: 'text', hex: '#141414', fg: W },
+{ name: 'Другорядний', token: 'textMuted', hex: '#5E5E58', fg: W },
+{ name: 'Акцент', token: 'accent', hex: '#C93C12', fg: W },
+{ name: 'Акцент натиснутий', token: 'accentPressed', hex: '#9E2E0C', fg: W },
+{ name: 'Акцент світлий', token: 'accentSoft', hex: '#FBE9E2', fg: '#9E2E0C' },
+{ name: 'Акцент середній', token: 'accentMid', hex: '#F2C3B0', fg: '#9E2E0C' },
+{ name: 'Полум’я', token: 'flameInner', hex: '#FFD3BF', fg: '#9E2E0C' },
+{ name: 'Виконано', token: 'success', hex: '#1B6B36', fg: W },
+{ name: 'Виконано світлий', token: 'successSoft', hex: '#E2F1E6', fg: '#1B6B36' },
+{ name: 'Пропущено', token: 'danger', hex: '#D92020', fg: W },
+{ name: 'Їжа', token: 'catFood', hex: '#D98A1C', fg: D },
+{ name: 'Сон', token: 'catSleep', hex: '#3B6EA8', fg: W }
+];
+const type = [
+{ name: 'Display', spec: '52 / 800', size: '52px', w: 800, color: '#C93C12', sample: '12' },
+{ name: 'Таймер', spec: '64 / 800', size: '44px', w: 800, color: D, sample: '00:42' },
+{ name: 'H1', spec: '30 / 800', size: '30px', w: 800, color: D, sample: 'Календар' },
+{ name: 'H1 дата', spec: '26 / 800', size: '26px', w: 800, color: D, sample: 'Середа, 21 жовтня' },
+{ name: 'Число картки', spec: '22–26 / 800', size: '24px', w: 800, color: D, sample: '2/3 · 412 т' },
+{ name: 'H2', spec: '16 / 700', size: '16px', w: 700, color: D, sample: 'План на сьогодні' },
+{ name: 'Тіло', spec: '14–15 / 600', size: '15px', w: 600, color: D, sample: 'Присідання зі штангою' },
+{ name: 'Другорядний', spec: '12–13 / 400', size: '13px', w: 400, color: '#5E5E58', sample: '6 вправ · ~70 хв' },
+{ name: 'Мітка', spec: '11–12 / 700, капс', size: '12px', w: 700, color: '#5E5E58', sample: 'ВПРАВА 1 З 4' }
+];
+const space = [4, 8, 12, 16, 20, 24, 32].map((n) => ({ n: n, px: n + 'px' }));
+const radii = [['8', 'тег'], ['10', 'чип'], ['12', 'поле'], ['14', 'кнопка'], ['16–20', 'картка'], ['22', 'герой']].map((r) => ({ px: r[0].split('–')[0] + 'px', n: r[0] + ' · ' + r[1] }));
+const flames = [16, 20, 32, 44];
+return { colors, type, space, radii, flames };
+}
+}
+</script>
+</body>
+</html>

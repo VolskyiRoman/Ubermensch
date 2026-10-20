@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>10 порад на відпочинок</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width:1640px;height:560px;box-sizing:border-box;background:#F4F4F1;padding:40px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));row-gap:40px;column-gap:20px;font-family:'Exo 2',sans-serif;color:#141414">
+<sc-for list="{{tips}}" as="t" hint-placeholder-count="10">
+<dc-import name="RestTip" tip="{{t}}" width="300px" hint-size="300px,220px"></dc-import>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1640,"height":560}}'>
+class Component extends DCLogic {
+renderVals() {
+return { tips: [0,1,2,3,4,5,6,7,8,9] };
+}
+}
+</script>
+</body>
+</html>

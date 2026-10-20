@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Звички, їжа, сон</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C93C12}a:hover{color:#9E2E0C}
+</style>
+</helmet>
+<div style="width:390px;height:{{rootH}};box-sizing:border-box;background:#F4F4F1;color:#141414;font-family:'Exo 2',sans-serif;position:relative;overflow:hidden">
+<div style="padding:48px 20px 110px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h1 style="margin:0;font-size:30px;font-weight:800;letter-spacing:-0.5px">Звички</h1>
+<button aria-label="Додати звичку" style="width:44px;height:44px;border:0;border-radius:12px;background:#C93C12;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg></button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px">
+<sc-for list="{{week}}" as="w" hint-placeholder-count="7">
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0;border-radius:12px;background:{{w.bg}};color:{{w.fg}};border:1px solid {{w.bd}}">
+<span style="font-size:11px;font-weight:600">{{w.d}}</span>
+<span style="font-size:16px;font-weight:800">{{w.n}}</span>
+<span style="font-size:10px;font-weight:700">{{w.f}}</span>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{full}}" hint-placeholder-val="{{ true }}">
+<sc-for list="{{sections}}" as="s" hint-placeholder-count="3">
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:2px">
+<div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:6px">
+<div style="display:flex;align-items:center;gap:8px">
+<span style="width:8px;height:8px;border-radius:50%;background:{{s.color}}"></span>
+<h2 style="margin:0;font-size:16px;font-weight:700">{{s.title}}</h2>
+<span style="font-size:16px;font-weight:800;color:#5E5E58">{{s.frac}}</span>
+</div>
+<span style="display:flex;align-items:center;gap:3px;font-size:13px;font-weight:700"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c.6 3.2 3 4.8 4.6 7 1.4 1.9 2.4 3.9 2.4 6.2C19 19 15.9 22 12 22s-7-3-7-6.8c0-2.4 1.2-4.4 2.8-5.9.2 1.6 1 2.8 2.2 3.4-.3-3.9 1-7.4 2-10.7z" fill="#C93C12"></path><path d="M12 12.5c1.6 1.6 3 3 3 5a3 3 0 0 1-6 0c0-1.3.7-2.3 1.6-3 .2.8.6 1.3 1.2 1.6-.1-1.4.1-2.6.2-3.6z" fill="#FFD3BF"></path></svg>{{s.streak}} днів</span>
+</div>
+<sc-for list="{{s.items}}" as="it" hint-placeholder-count="3">
+<button onClick="{{it.toggle}}" aria-pressed="{{it.pressed}}" style="display:flex;align-items:center;gap:12px;height:48px;background:none;border:0;border-top:1px solid #EFEFEA;padding:0;text-align:left;font-family:'Exo 2',sans-serif;color:#141414;cursor:pointer">
+<span style="width:24px;height:24px;flex:none;border-radius:7px;box-sizing:border-box;border:{{it.box}};background:{{it.fill}};display:flex;align-items:center;justify-content:center"><svg width="13" height="13" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 6.2l2.3 2.3 4.7-5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+<span style="flex:1;display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">{{it.name}}</span><span style="font-size:12px;color:#5E5E58">{{it.meta}}</span></span>
+<span style="font-size:12px;font-weight:700;color:{{it.stc}}">{{it.st}}</span>
+</button>
+</sc-for>
+</div>
+</sc-for>
+</sc-if>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:22px 18px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
+<svg width="160" height="130" viewBox="0 0 160 130" role="img" aria-label="Паросток у вазоні з галочкою">
+<circle cx="80" cy="66" r="58" fill="#F4F4F1"></circle>
+<path d="M80 86V44" stroke="#141414" stroke-width="3" stroke-linecap="round"></path>
+<ellipse cx="66" cy="62" rx="15" ry="7" transform="rotate(-28 66 62)" fill="#2E8B57"></ellipse>
+<ellipse cx="94" cy="54" rx="15" ry="7" transform="rotate(28 94 54)" fill="#2E8B57"></ellipse>
+<circle cx="80" cy="30" r="13" fill="#141414"></circle>
+<path d="M74 30l4 4 8-8" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+<rect x="52" y="84" width="56" height="12" rx="4" fill="#9E2E0C"></rect>
+<path d="M56 96h48l-6 26H62z" fill="#C93C12"></path>
+<path d="M66 106h28" stroke="#FFD3BF" stroke-width="3" stroke-linecap="round"></path>
+</svg>
+<span style="font-size:17px;font-weight:800">Тут виростуть твої звички</span>
+<span style="font-size:13px;color:#5E5E58;line-height:1.45;max-width:290px">Почни з однієї маленької: склянка води зранку чи 10 хвилин розтяжки. Їжу і сон теж можна відмічати тут.</span>
+<button style="margin-top:6px;border:0;background:#C93C12;color:#FFFFFF;border-radius:12px;padding:12px 18px;font:700 14px 'Exo 2',sans-serif">Додати першу звичку</button>
+</div>
+</sc-if>
+<div style="display:flex;gap:10px;align-items:flex-start;padding:4px 6px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5E5E58" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7.5v.5"></path></svg>
+<span style="font-size:12px;color:#5E5E58;line-height:1.45">Те, що не відмічено до кінця дня, вважається невиконаним. Ідеальний день зараховується, коли виконано все: звички, їжу, сон і тренування.</span>
+</div>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:84px">
+<dc-import name="TabBar" active="hab" hint-size="390px,84px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"empty":{"editor":"boolean","default":false},"$preview":{"width":390,"height":1010}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { done: { stretch: true, water: true, read: false, b: true, l: true, d: false, sleep: true } };
+}
+renderVals() {
+const done = this.state.done;
+const mk = (id, name, meta) => {
+const on = !!done[id];
+return {
+name, meta, pressed: on ? 'true' : 'false',
+box: on ? '0' : '2px solid #C8C8C0', fill: on ? '#C93C12' : 'transparent',
+st: on ? 'Виконано' : 'Не відмічено', stc: on ? '#141414' : '#5E5E58',
+toggle: () => this.setState({ done: { ...this.state.done, [id]: !this.state.done[id] } }), on
+};
+};
+const groups = [
+{ title: 'Звички', color: '#141414', streak: 15, items: [mk('stretch','Ранкова розтяжка','10 хв · стрік 15'), mk('water','Вода 2 л','стрік 31'), mk('read','Читання','20 хв · стрік 4')] },
+{ title: 'Їжа', color: '#D98A1C', streak: 23, items: [mk('b','Сніданок','до 10:00'), mk('l','Обід','13:00–15:00'), mk('d','Вечеря','до 20:00')] },
+{ title: 'Сон', color: '#3B6EA8', streak: 6, items: [mk('sleep','Сон 7+ годин','відмітити зранку')] }
+];
+const sections = groups.map((g) => ({ ...g, frac: g.items.filter((i) => i.on).length + '/' + g.items.length }));
+const wraw = [['Пн','19','8/8'],['Вт','20','8/8'],['Ср','21','5/8'],['Чт','22',''],['Пт','23',''],['Сб','24',''],['Нд','25','']];
+const empty = this.props.empty === true || this.props.empty === 'true';
+const week = wraw.map((w, i) => ({ d: w[0], n: w[1], f: empty ? '·' : (w[2] || '·'), bg: i === 2 ? '#C93C12' : (i < 2 ? '#FFFFFF' : 'transparent'), fg: i === 2 ? '#FFFFFF' : (i < 2 ? '#141414' : '#5E5E58'), bd: i === 2 ? '#C93C12' : '#E1E1DB' }));
+return { sections, week, empty, full: !empty, rootH: empty ? '844px' : '1010px' };
+}
+}
+</script>
+</body>
+</html>

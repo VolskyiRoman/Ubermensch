@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Завершення підходу</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C93C12}a:hover{color:#9E2E0C}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#5C5C58;color:#141414;font-family:'Exo 2',sans-serif;position:relative;overflow:hidden">
+<div style="padding:60px 20px 0;display:flex;flex-direction:column;gap:8px;color:#E8E8E2">
+<span style="font-size:12px;font-weight:700">ВПРАВА 1 З 4</span>
+<span style="font-size:26px;font-weight:800">Присідання зі штангою</span>
+</div>
+<div role="dialog" aria-label="Завершення підходу" style="position:absolute;left:0;right:0;bottom:0;background:#FFFFFF;border-radius:28px 28px 0 0;padding:10px 20px 30px;display:flex;flex-direction:column;gap:16px">
+<span style="align-self:center;width:40px;height:5px;border-radius:3px;background:#E1E1DB"></span>
+<div style="display:flex;justify-content:space-between;align-items:flex-end">
+<div style="display:flex;flex-direction:column;gap:2px">
+<span style="font-size:22px;font-weight:800">Підхід 3</span>
+<span style="font-size:13px;color:#5E5E58">Тривалість підходу: <span style="font-weight:700;color:#141414">0:48</span></span>
+</div>
+<button onClick="{{repeat}}" style="display:flex;align-items:center;gap:6px;border:0;background:#141414;color:#FFFFFF;border-radius:10px;padding:9px 12px;font:700 13px 'Exo 2',sans-serif"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5.3L20 9"></path><path d="M20 4v5h-5"></path><path d="M20 12a8 8 0 0 1-14 5.3L4 15"></path><path d="M4 20v-5h5"></path></svg>Як минулий: 100 × 8</button>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+<div style="border:1px solid #E1E1DB;border-radius:18px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:8px">
+<span style="font-size:12px;font-weight:700;color:#5E5E58">ВАГА, КГ</span>
+<span style="font-size:40px;font-weight:800;line-height:1">{{w}}</span>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;width:100%">
+<button onClick="{{wMinus}}" aria-label="Мінус 2,5 кг" style="height:44px;border:0;border-radius:10px;background:#F4F4F1;font:800 15px 'Exo 2',sans-serif;color:#141414">−2,5</button>
+<button onClick="{{wPlus}}" aria-label="Плюс 2,5 кг" style="height:44px;border:0;border-radius:10px;background:#F4F4F1;font:800 15px 'Exo 2',sans-serif;color:#141414">+2,5</button>
+</div>
+</div>
+<div style="border:1px solid #E1E1DB;border-radius:18px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:8px">
+<span style="font-size:12px;font-weight:700;color:#5E5E58">ПОВТОРИ</span>
+<span style="font-size:40px;font-weight:800;line-height:1">{{r}}</span>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;width:100%">
+<button onClick="{{rMinus}}" aria-label="Мінус повтор" style="height:44px;border:0;border-radius:10px;background:#F4F4F1;font:800 18px 'Exo 2',sans-serif;color:#141414">−</button>
+<button onClick="{{rPlus}}" aria-label="Плюс повтор" style="height:44px;border:0;border-radius:10px;background:#F4F4F1;font:800 18px 'Exo 2',sans-serif;color:#141414">+</button>
+</div>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between">
+<span style="font-size:14px;font-weight:600">Відпочинок після підходу</span>
+<div style="display:flex;align-items:center;gap:6px">
+<button onClick="{{restMinus}}" aria-label="Мінус 15 секунд" style="width:36px;height:36px;border:1px solid #E1E1DB;background:#FFFFFF;border-radius:10px;font:800 16px 'Exo 2',sans-serif;color:#141414">−</button>
+<span style="font-size:16px;font-weight:800;min-width:44px;text-align:center">{{rest}}</span>
+<button onClick="{{restPlus}}" aria-label="Плюс 15 секунд" style="width:36px;height:36px;border:1px solid #E1E1DB;background:#FFFFFF;border-radius:10px;font:800 16px 'Exo 2',sans-serif;color:#141414">+</button>
+</div>
+</div>
+<a href="Rest.dc.html" style="display:block;text-align:center;text-decoration:none;background:#C93C12;color:#FFFFFF;border-radius:14px;padding:16px;font-size:16px;font-weight:700">Зберегти і відпочити</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+constructor(props) {
+super(props);
+this.state = { w: 100, r: 7, warm: false, rest: 180 };
+}
+renderVals() {
+const s = this.state;
+const fmt = (n) => String(n).replace('.', ',');
+const mm = Math.floor(s.rest / 60) + ':' + String(s.rest % 60).padStart(2, '0');
+return {
+w: fmt(s.w), r: s.r, rest: mm,
+wPlus: () => this.setState({ w: s.w + 2.5 }),
+wMinus: () => this.setState({ w: Math.max(0, s.w - 2.5) }),
+rPlus: () => this.setState({ r: s.r + 1 }),
+rMinus: () => this.setState({ r: Math.max(0, s.r - 1) }),
+repeat: () => this.setState({ w: 100, r: 8 }),
+toggleWarm: () => this.setState({ warm: !s.warm }),
+restPlus: () => this.setState({ rest: s.rest + 15 }),
+restMinus: () => this.setState({ rest: Math.max(0, s.rest - 15) }),
+warmPressed: s.warm ? 'true' : 'false',
+warmBd: s.warm ? '#141414' : '#E1E1DB', warmBg: s.warm ? '#F4F4F1' : '#FFFFFF',
+warmBox: s.warm ? '0' : '2px solid #C8C8C0', warmFill: s.warm ? '#141414' : 'transparent'
+};
+}
+}
+</script>
+</body>
+</html>

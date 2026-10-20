@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Профіль</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#C93C12}a:hover{color:#9E2E0C}
+</style>
+</helmet>
+<div style="width:390px;height:900px;box-sizing:border-box;background:#F4F4F1;color:#141414;font-family:'Exo 2',sans-serif;position:relative;overflow:hidden">
+<div style="padding:48px 20px 110px;display:flex;flex-direction:column;gap:12px">
+<h1 style="margin:0;font-size:30px;font-weight:800;letter-spacing:-0.5px">Профіль</h1>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:2px">
+<span style="font-size:12px;color:#5E5E58">Вага тіла</span>
+<div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:28px;font-weight:800">80,1 кг</span><span style="font-size:13px;font-weight:700;color:#5E5E58">−2,3 за 3 міс</span></div>
+</div>
+<button style="border:0;background:#C93C12;color:#FFFFFF;border-radius:10px;padding:10px 12px;font:700 13px 'Exo 2',sans-serif">Записати</button>
+</div>
+<svg width="310" height="110" viewBox="0 0 320 110" role="img" aria-label="Вага тіла знизилась з 82,4 до 80,1 кг">
+<line x1="0" y1="100" x2="320" y2="100" stroke="#E1E1DB" stroke-width="1"></line>
+<polyline points="10,14 38,22 66,18 94,34 122,40 150,38 178,52 206,60 234,58 262,72 290,80 312,86" fill="none" stroke="#141414" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></polyline>
+<circle cx="312" cy="86" r="5" fill="#C93C12" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+<div style="display:flex;justify-content:space-between;font-size:11px;color:#5E5E58"><span>липень</span><span>серпень</span><span>вересень</span><span>жовтень</span></div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:4px 16px;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;height:60px">
+<div style="display:flex;flex-direction:column"><span style="font-size:15px;font-weight:600">Відпочинок за замовчуванням</span><span style="font-size:12px;color:#5E5E58">для нових вправ</span></div>
+<div style="display:flex;align-items:center;gap:6px">
+<button aria-label="Зменшити на 15 секунд" style="width:32px;height:32px;border:1px solid #E1E1DB;background:#FFFFFF;border-radius:8px;font:700 16px 'Exo 2',sans-serif;color:#141414">−</button>
+<span style="font-size:15px;font-weight:800;min-width:38px;text-align:center">3:00</span>
+<button aria-label="Збільшити на 15 секунд" style="width:32px;height:32px;border:1px solid #E1E1DB;background:#FFFFFF;border-radius:8px;font:700 16px 'Exo 2',sans-serif;color:#141414">+</button>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;height:56px;border-top:1px solid #EFEFEA">
+<label for="t1" style="font-size:15px;font-weight:600">Сповіщення таймера відпочинку</label>
+<span style="position:relative;width:46px;height:28px;border-radius:999px;background:#C93C12;flex:none"><input id="t1" type="checkbox" checked style="position:absolute;inset:0;opacity:0;margin:0"><span style="position:absolute;top:3px;left:21px;width:22px;height:22px;border-radius:50%;background:#FFFFFF"></span></span>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;height:56px;border-top:1px solid #EFEFEA">
+<label for="t2" style="font-size:15px;font-weight:600">Нагадування в день тренування</label>
+<span style="position:relative;width:46px;height:28px;border-radius:999px;background:#C93C12;flex:none"><input id="t2" type="checkbox" checked style="position:absolute;inset:0;opacity:0;margin:0"><span style="position:absolute;top:3px;left:21px;width:22px;height:22px;border-radius:50%;background:#FFFFFF"></span></span>
+</div>
+</div>
+<div style="background:#FFFFFF;border:1px solid #E1E1DB;border-radius:20px;padding:4px 16px;display:flex;flex-direction:column">
+<a href="Templates.dc.html" style="display:flex;align-items:center;justify-content:space-between;height:56px;text-decoration:none;color:#141414"><span style="font-size:15px;font-weight:600">Шаблони тренувань</span><span style="display:flex;align-items:center;gap:6px;font-size:13px;color:#5E5E58">4 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></span></a>
+<a href="#" style="display:flex;align-items:center;justify-content:space-between;height:56px;border-top:1px solid #EFEFEA;text-decoration:none;color:#141414"><span style="font-size:15px;font-weight:600">Бібліотека вправ</span><span style="display:flex;align-items:center;gap:6px;font-size:13px;color:#5E5E58">38 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></span></a></div>
+<button style="display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border:1px solid #141414;background:#FFFFFF;border-radius:14px;font:700 15px 'Exo 2',sans-serif;color:#141414"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Експорт даних у CSV</button>
+<span style="font-size:12px;color:#5E5E58;text-align:center">Усі дані зберігаються лише на цьому телефоні</span>
+</div>
+<div style="position:absolute;left:0;right:0;bottom:0;height:84px">
+<dc-import name="TabBar" active="prof" hint-size="390px,84px"></dc-import>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
