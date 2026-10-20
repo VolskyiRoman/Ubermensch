@@ -12,6 +12,7 @@ export const colors = {
   text: '#141414',
   textMuted: '#5E5E58',
   textOnDarkMuted: '#B9B9B2',
+  textDisabled: '#8A8A84',
   onAccent: '#FFFFFF',
 
   accent: '#C93C12',
@@ -19,6 +20,7 @@ export const colors = {
   accentSoft: '#FBE9E2', // planned days, superset tags
   accentMid: '#F2C3B0',
   flameInner: '#FFD3BF',
+  accentOnDark: '#FFB59B', // accent labels on dark surfaces (set timer)
 
   success: '#1B6B36', // completed days (text)
   successSoft: '#E2F1E6', // completed days (background)
@@ -57,16 +59,21 @@ export const type = {
   tab: { fontFamily: fonts.semibold, fontSize: 11 },
 } as const;
 
-export const space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 20, xxl: 24, xxxl: 32 } as const;
+export const space = { xxs: 2, xs: 4, xs2: 6, sm: 8, sm2: 10, md: 12, md2: 14, lg: 16, xl: 20, xxl: 24, xxxl: 32 } as const;
 export const screenPadding = 20;
 
 export const radius = {
+  cell: 2, // heatmap cells
+  segment: 3, // segmented progress
+  bar: 4, // bar chart
+  checkbox: 7,
   tag: 8,
   chip: 10,
   input: 12,
   button: 14,
   card: 20,
   cardSmall: 16,
+  panel: 18, // big stepper, set timer
   hero: 22,
   pill: 999,
 } as const;
