@@ -91,6 +91,118 @@ export function BackIcon(props: IconProps) {
   );
 }
 
+export function ForwardIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={18} strokeWidth={2.2} {...props}>
+      <Path d="M9 6l6 6-6 6" />
+    </StrokeIcon>
+  );
+}
+
+export function PencilIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={16} strokeWidth={2} {...props}>
+      <Path d="M4 20h4L19 9l-4-4L4 16v4z" />
+    </StrokeIcon>
+  );
+}
+
+export function CloseIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={18} strokeWidth={2.2} {...props}>
+      <Path d="M6 6l12 12M18 6L6 18" />
+    </StrokeIcon>
+  );
+}
+
+export function ChevronDownIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={18} strokeWidth={2.2} {...props}>
+      <Path d="M6 9l6 6 6-6" />
+    </StrokeIcon>
+  );
+}
+
+export function NoteIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={18} {...props}>
+      <Path d="M5 4h14v16H5z" />
+      <Path d="M9 9h6M9 13h6M9 17h3" />
+    </StrokeIcon>
+  );
+}
+
+export function HistoryIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={18} {...props}>
+      <Path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+      <Path d="M3 3v5h5M12 7v5l3 2" />
+    </StrokeIcon>
+  );
+}
+
+export function ThermometerIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={18} strokeWidth={1.9} {...props}>
+      <Path d="M10 14.8V5a2 2 0 1 1 4 0v9.8a4 4 0 1 1-4 0z" />
+      <Path d="M12 9v7" />
+    </StrokeIcon>
+  );
+}
+
+export function RepeatIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={16} strokeWidth={2} {...props}>
+      <Path d="M4 12a8 8 0 0 1 14-5.3L20 9" />
+      <Path d="M20 4v5h-5" />
+      <Path d="M20 12a8 8 0 0 1-14 5.3L4 15" />
+      <Path d="M4 20v-5h5" />
+    </StrokeIcon>
+  );
+}
+
+export function SearchIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={18} strokeWidth={2} {...props}>
+      <Circle cx={11} cy={11} r={7} />
+      <Path d="M20 20l-4-4" />
+    </StrokeIcon>
+  );
+}
+
+export function DownloadIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={18} strokeWidth={2} {...props}>
+      <Path d="M12 4v11M7 10l5 5 5-5M5 20h14" />
+    </StrokeIcon>
+  );
+}
+
+export function InfoIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={18} {...props}>
+      <Circle cx={12} cy={12} r={9} />
+      <Path d="M12 11v6M12 7.5v.5" />
+    </StrokeIcon>
+  );
+}
+
+export function ArrowUpIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={16} strokeWidth={2.2} {...props}>
+      <Path d="M12 19V5M6 11l6-6 6 6" />
+    </StrokeIcon>
+  );
+}
+
+export function ArrowDownIcon(props: IconProps) {
+  return (
+    <StrokeIcon size={16} strokeWidth={2.2} {...props}>
+      <Path d="M12 5v14M6 13l6 6 6-6" />
+    </StrokeIcon>
+  );
+}
+
 export function TrophyIcon({ size = 18, color = colors.accent }: IconProps) {
   return (
     <StrokeIcon size={size} color={color}>

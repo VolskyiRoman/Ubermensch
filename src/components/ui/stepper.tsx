@@ -1,4 +1,5 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useRef, useState } from 'react';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { colors, fonts, radius, sizes, space } from '@/theme/theme';
 
@@ -43,19 +44,59 @@ type BigStepperProps = {
   incrementLabel: string;
   onDecrement: () => void;
   onIncrement: () => void;
+  /** Makes the value typeable; called with the raw text on every keystroke. */
+  onChangeText?: (text: string) => void;
+  keyboardType?: 'decimal-pad' | 'number-pad';
 };
 
-/** Large stepper for weight and reps. */
-export function BigStepper({ label, value, decrementLabel, incrementLabel, onDecrement, onIncrement }: BigStepperProps) {
+/** Large stepper for weight and reps; with `onChangeText` the value can also be typed. */
+export function BigStepper({
+  label,
+  value,
+  decrementLabel,
+  incrementLabel,
+  onDecrement,
+  onIncrement,
+  onChangeText,
+  keyboardType = 'decimal-pad',
+}: BigStepperProps) {
+  const input = useRef<TextInput>(null);
+  // While typing, the raw text is shown ("82," mid-entry); the formatted value returns on blur.
+  const [draft, setDraft] = useState<string | null>(null);
+  const step = (change: () => void) => () => {
+    input.current?.blur();
+    setDraft(null);
+    change();
+  };
+
   return (
     <View style={styles.big}>
       <Text style={styles.bigLabel}>{label}</Text>
-      <Text style={styles.bigValue}>{value}</Text>
+      {onChangeText ? (
+        <TextInput
+          ref={input}
+          accessibilityLabel={label}
+          accessibilityHint="Двічі торкніться, щоб ввести значення"
+          value={draft ?? value}
+          onFocus={() => setDraft(value)}
+          onChangeText={(text) => {
+            setDraft(text);
+            onChangeText(text);
+          }}
+          onBlur={() => setDraft(null)}
+          keyboardType={keyboardType}
+          selectTextOnFocus
+          returnKeyType="done"
+          style={[styles.bigValue, styles.bigInput, draft !== null && styles.bigInputFocused]}
+        />
+      ) : (
+        <Text style={styles.bigValue}>{value}</Text>
+      )}
       <View style={styles.bigButtons}>
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={`${label}: ${decrementLabel}`}
-          onPress={onDecrement}
+          onPress={step(onDecrement)}
           style={({ pressed }) => [styles.bigButton, pressed && styles.pressed]}
         >
           <Text style={styles.bigButtonLabel}>{decrementLabel}</Text>
@@ -63,7 +104,7 @@ export function BigStepper({ label, value, decrementLabel, incrementLabel, onDec
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={`${label}: ${incrementLabel}`}
-          onPress={onIncrement}
+          onPress={step(onIncrement)}
           style={({ pressed }) => [styles.bigButton, pressed && styles.pressed]}
         >
           <Text style={styles.bigButtonLabel}>{incrementLabel}</Text>
@@ -97,6 +138,15 @@ const styles = StyleSheet.create({
   },
   bigLabel: { fontFamily: fonts.bold, fontSize: 11, color: colors.textMuted, textTransform: 'uppercase' },
   bigValue: { fontFamily: fonts.extrabold, fontSize: 34, lineHeight: 38, color: colors.text },
+  bigInput: {
+    alignSelf: 'stretch',
+    minHeight: sizes.touch,
+    padding: 0,
+    textAlign: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: colors.divider,
+  },
+  bigInputFocused: { borderBottomColor: colors.accent },
   bigButtons: { flexDirection: 'row', gap: space.xs2, alignSelf: 'stretch' },
   bigButton: {
     flex: 1,

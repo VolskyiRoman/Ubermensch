@@ -13,6 +13,7 @@ export const colors = {
   textMuted: '#5E5E58',
   textOnDarkMuted: '#B9B9B2',
   textDisabled: '#8A8A84',
+  borderOnDark: '#4A4A44', // outlined badges on dark cards
   onAccent: '#FFFFFF',
 
   accent: '#C93C12',
@@ -20,12 +21,18 @@ export const colors = {
   accentSoft: '#FBE9E2', // planned days, superset tags
   accentMid: '#F2C3B0',
   flameInner: '#FFD3BF',
+  flameMid: '#F26A1B', // animated dashboard flame: middle tongue
+  flameCore: '#FFC94A', // animated dashboard flame: hot core
+  flameGlow: '#FF8A4C', // animated dashboard flame: glow behind it
   accentOnDark: '#FFB59B', // accent labels on dark surfaces (set timer)
+  live: '#FF6A3D', // "set in progress" dot on the dark set timer
 
   success: '#1B6B36', // completed days (text)
   successSoft: '#E2F1E6', // completed days (background)
+  successBorder: '#A9D6B5', // calendar legend swatch
   growth: '#1F7A3A', // positive stat deltas (+6%, −4 min)
   danger: '#D92020', // missed workouts
+  dangerText: '#C21B1B', // "missed" status label
 
   catWorkout: '#C93C12',
   catHabit: '#141414',
@@ -34,6 +41,11 @@ export const colors = {
 
   heat: ['#EDEDE7', '#F2C3B0', '#E07D57', '#C93C12'] as const, // heatmap levels 0–3
   overlay: 'rgba(20,20,20,0.6)',
+  onOverlay: '#E8E8E2', // text on the dimmed screen behind a bottom sheet
+
+  // Illustration-only fills (empty states, rest tips).
+  illustrationWater: '#8DB8E8',
+  illustrationLeaf: '#2E8B57',
 } as const;
 
 // Font: Exo 2 (@expo-google-fonts/exo-2): 400, 600, 700, 800.

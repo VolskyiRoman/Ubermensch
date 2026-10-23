@@ -41,9 +41,10 @@ type CategoryStatCardProps = {
   color: string;
   value: string;
   streak: number;
+  showFlame?: boolean;
 };
 
-export function CategoryStatCard({ label, color, value, streak }: CategoryStatCardProps) {
+export function CategoryStatCard({ label, color, value, streak, showFlame = false }: CategoryStatCardProps) {
   return (
     <View style={styles.category}>
       <View style={styles.categoryHeader}>
@@ -52,7 +53,10 @@ export function CategoryStatCard({ label, color, value, streak }: CategoryStatCa
       </View>
       <View style={styles.categoryFooter}>
         <Text style={styles.categoryValue}>{value}</Text>
-        <Text style={styles.categoryStreak}>{streak}</Text>
+        <View style={styles.categoryStreakRow} accessible accessibilityLabel={`Стрік: ${streak}`}>
+          {showFlame && <FlameIcon size={16} />}
+          <Text style={styles.categoryStreak}>{streak}</Text>
+        </View>
       </View>
     </View>
   );
@@ -140,6 +144,7 @@ const styles = StyleSheet.create({
   streakNumber: { fontFamily: fonts.extrabold, fontSize: 40, lineHeight: 44, color: colors.accent },
   category: {
     flex: 1,
+    backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: radius.cardSmall,
@@ -151,10 +156,12 @@ const styles = StyleSheet.create({
   dot: { width: 8, height: 8, borderRadius: radius.pill },
   categoryLabel: { fontFamily: fonts.semibold, fontSize: 13, color: colors.text },
   categoryFooter: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' },
-  categoryValue: { fontFamily: fonts.extrabold, fontSize: 24, lineHeight: 26, color: colors.text },
+  categoryValue: { fontFamily: fonts.extrabold, fontSize: 26, lineHeight: 28, color: colors.text },
+  categoryStreakRow: { flexDirection: 'row', alignItems: 'center', gap: space.xxs },
   categoryStreak: { fontFamily: fonts.bold, fontSize: 13, color: colors.text },
   stat: {
     flex: 1,
+    backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
     borderRadius: radius.cardSmall,

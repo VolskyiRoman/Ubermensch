@@ -3,7 +3,7 @@
 Workout and habit tracker built with Expo (React Native). Full specification: `docs/SPEC.md`. Design: `docs/design/`. Original handoff notes and the build plan: `docs/HANDOFF.md`.
 
 ## Stack
-- Expo SDK (latest stable), TypeScript, Expo Router (tabs + stack).
+- Expo SDK 57 (pinned to the version supported by the store Expo Go; do not upgrade without asking), TypeScript, Expo Router (tabs + stack).
 - Data: `expo-sqlite` + Drizzle ORM, migrations in `src/db/migrations`.
 - Active workout state: Zustand, persisted so it survives an app restart.
 - Charts and illustrations: `react-native-svg` (custom components, no heavy chart libraries).

@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, Text, type PressableProps, type StyleProp, type 
 
 import { colors, fonts, radius, sizes, space } from '@/theme/theme';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'dark' | 'text';
+export type ButtonVariant = 'primary' | 'secondary' | 'dark' | 'outlineOnDark' | 'text';
 
 type ButtonProps = Omit<PressableProps, 'children' | 'style'> & {
   title: string;
@@ -96,6 +96,7 @@ const containerStyles = StyleSheet.create({
   primary: { backgroundColor: colors.accent, paddingVertical: space.md2 },
   secondary: { backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.text, paddingVertical: space.md2 },
   dark: { backgroundColor: colors.text, paddingVertical: space.md2 },
+  outlineOnDark: { backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.borderOnDark, paddingVertical: space.md },
   text: { backgroundColor: 'transparent', paddingHorizontal: space.xs2, alignSelf: 'flex-start' },
 });
 
@@ -103,6 +104,7 @@ const pressedStyles = StyleSheet.create({
   primary: { backgroundColor: colors.accentPressed },
   secondary: { backgroundColor: colors.divider },
   dark: { opacity: 0.85 },
+  outlineOnDark: { opacity: 0.7 },
   text: { opacity: 0.6 },
 });
 
@@ -110,5 +112,6 @@ const labelStyles = StyleSheet.create({
   primary: { fontFamily: fonts.bold, fontSize: 16, color: colors.onAccent },
   secondary: { fontFamily: fonts.bold, fontSize: 15, color: colors.text },
   dark: { fontFamily: fonts.bold, fontSize: 15, color: colors.onAccent },
+  outlineOnDark: { fontFamily: fonts.bold, fontSize: 14, color: colors.onAccent },
   text: { fontFamily: fonts.bold, fontSize: 14, color: colors.accent },
 });

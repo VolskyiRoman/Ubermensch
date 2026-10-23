@@ -18,11 +18,21 @@ const tabs: { key: TabKey; label: string; Icon: ComponentType<{ color?: string }
 type TabBarProps = {
   active: TabKey;
   onChange?: (key: TabKey) => void;
+  /** Bottom safe-area inset; the design reserves 24 px. */
+  bottomInset?: number;
 };
 
-export function TabBar({ active, onChange }: TabBarProps) {
+const DEFAULT_BOTTOM_INSET = space.xxl;
+
+export function TabBar({ active, onChange, bottomInset = DEFAULT_BOTTOM_INSET }: TabBarProps) {
+  const paddingBottom = Math.max(bottomInset, space.sm);
+
   return (
-    <View style={styles.bar} accessibilityRole="tablist" accessibilityLabel="Основна навігація">
+    <View
+      style={[styles.bar, { height: sizes.tabBar - DEFAULT_BOTTOM_INSET + paddingBottom, paddingBottom }]}
+      accessibilityRole="tablist"
+      accessibilityLabel="Основна навігація"
+    >
       {tabs.map(({ key, label, Icon }) => {
         const selected = key === active;
         const color = selected ? colors.accent : colors.textMuted;
@@ -46,14 +56,12 @@ export function TabBar({ active, onChange }: TabBarProps) {
 
 const styles = StyleSheet.create({
   bar: {
-    height: sizes.tabBar,
     backgroundColor: colors.surface,
     borderTopWidth: 1,
     borderTopColor: colors.border,
     flexDirection: 'row',
     paddingTop: space.sm,
     paddingHorizontal: space.xs2,
-    paddingBottom: space.xxl,
   },
   item: {
     flex: 1,
