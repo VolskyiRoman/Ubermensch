@@ -1,11 +1,13 @@
-// CSV export (docs/SPEC.md §8): workouts, sets, habits and body weight as separate files.
+// CSV export (docs/SPEC.md §8): workouts, sets, habits, sleep and body weight as separate files.
 import { asc, eq } from 'drizzle-orm';
 import { File, Paths } from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 
 import { db } from '@/db/client';
-import { bodyWeight, exercises, habitLogs, habits, sets, workoutItems, workouts } from '@/db/schema';
+import { bodyWeight, exercises, habitLogs, habits, sets, sleepLogs, workoutItems, workouts } from '@/db/schema';
 import { toCsv } from '@/domain/csv';
+import { sleepDurationMin } from '@/domain/sleep';
+import { formatTimeOfDay } from '@/lib/format';
 
 const iso = (ms: number | null) => (ms === null ? null : new Date(ms).toISOString());
 
@@ -37,6 +39,7 @@ function buildFiles() {
     .innerJoin(habits, eq(habitLogs.habitId, habits.id))
     .orderBy(asc(habitLogs.date))
     .all();
+  const sleepRows = db.select().from(sleepLogs).orderBy(asc(sleepLogs.date)).all();
   const weightRows = db.select().from(bodyWeight).orderBy(asc(bodyWeight.date)).all();
 
   return {
@@ -69,6 +72,15 @@ function buildFiles() {
       })),
     ),
     'habits.csv': toCsv(['date', 'habit', 'category', 'done'], habitRows),
+    'sleep.csv': toCsv(
+      ['date', 'bedtime', 'wake_up', 'duration_min'],
+      sleepRows.map((n) => ({
+        date: n.date,
+        bedtime: formatTimeOfDay(n.bedMin),
+        wake_up: formatTimeOfDay(n.wakeMin),
+        duration_min: sleepDurationMin(n),
+      })),
+    ),
     'body_weight.csv': toCsv(
       ['date', 'weight_kg'],
       weightRows.map((w) => ({ date: w.date, weight_kg: w.weightKg })),
@@ -76,7 +88,7 @@ function buildFiles() {
   };
 }
 
-/** Writes the four CSV files to the cache and opens the share sheet for each in turn. */
+/** Writes the CSV files to the cache and opens the share sheet for each in turn. */
 export async function exportCsv() {
   if (!(await Sharing.isAvailableAsync())) throw new Error('Поділитися файлами на цьому пристрої неможливо');
   for (const [name, content] of Object.entries(buildFiles())) {

@@ -18,7 +18,7 @@ type LogSetSheetProps = {
   initial: WeightReps;
   /** Plan for this set, shown with the difference from the entered values. */
   planned: WeightReps | null;
-  /** "Як минулий" values: previous set of this session or the same set last time. */
+  /** "Як минулий" values: previous set of this session or the same set last time; one tap saves them. */
   previous: WeightReps | null;
   /** null hides the rest row (next superset member follows without rest). */
   restSec: number | null;
@@ -41,6 +41,7 @@ function SheetContent({ setNumber, durationSec, initial, planned, previous, rest
   const [weightKg, setWeightKg] = useState(initial.weightKg);
   const [reps, setReps] = useState(initial.reps);
   const [rest, setRest] = useState(restSec ?? 0);
+  const save = (values: WeightReps) => onSave({ ...values, restSec: restSec === null ? 0 : rest });
 
   return (
     <KeyboardAvoidingView style={styles.backdrop} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -64,12 +65,11 @@ function SheetContent({ setNumber, durationSec, initial, planned, previous, rest
           {previous && (
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel={`Як минулий: ${formatDecimal(previous.weightKg)} кілограмів, ${previous.reps} повторів`}
+              accessibilityLabel={`Зберегти як минулий: ${formatDecimal(previous.weightKg)} кілограмів, ${previous.reps} повторів`}
               onPress={() => {
                 Keyboard.dismiss();
-                setWeightKg(previous.weightKg);
-                setReps(previous.reps);
                 void Haptics.selectionAsync();
+                save(previous);
               }}
               style={({ pressed }) => [styles.repeat, pressed && styles.pressed]}
             >
@@ -133,7 +133,7 @@ function SheetContent({ setNumber, durationSec, initial, planned, previous, rest
           </View>
         )}
 
-        <Button title={saveLabel} onPress={() => onSave({ weightKg, reps, restSec: restSec === null ? 0 : rest })} />
+        <Button title={saveLabel} onPress={() => save({ weightKg, reps })} />
       </Pressable>
     </KeyboardAvoidingView>
   );

@@ -131,6 +131,100 @@ export function RestRing({
   );
 }
 
+type SleepArc = {
+  /** Minutes after midnight. */
+  bedMin: number;
+  wakeMin: number;
+};
+
+type SleepDialProps = {
+  /** The arc drawn on top; null leaves the dial empty. */
+  arc: SleepArc | null;
+  /** Optional arc drawn underneath, e.g. the planned schedule behind the actual night. */
+  backgroundArc?: SleepArc | null;
+  color?: string;
+  backgroundColor?: string;
+  label: string;
+  caption?: string;
+  size?: number;
+  accessibilityLabel: string;
+};
+
+const DIAL_VIEWBOX = 140;
+const DIAL_RADIUS = 52;
+const DIAL_STROKE = 14;
+const DIAL_TICK_INNER = 62;
+const DIAL_TICK_OUTER = 68;
+const MINUTES_PER_DAY = 24 * 60;
+
+/** 24-hour dial with midnight at the top: the arc runs clockwise from bedtime to wake-up. */
+export function SleepDial({
+  arc,
+  backgroundArc,
+  color = colors.catSleep,
+  backgroundColor = colors.catSleepSoft,
+  label,
+  caption,
+  size = 120,
+  accessibilityLabel,
+}: SleepDialProps) {
+  const circumference = 2 * Math.PI * DIAL_RADIUS;
+  const center = DIAL_VIEWBOX / 2;
+  const renderArc = (a: SleepArc, stroke: string) => {
+    const length = (((a.wakeMin - a.bedMin) % MINUTES_PER_DAY) + MINUTES_PER_DAY) % MINUTES_PER_DAY;
+    if (length === 0) return null;
+    const dash = (length / MINUTES_PER_DAY) * circumference;
+    // The pattern repeats every circumference, so a night across midnight wraps past the top.
+    return (
+      <Circle
+        cx={center}
+        cy={center}
+        r={DIAL_RADIUS}
+        fill="none"
+        stroke={stroke}
+        strokeWidth={DIAL_STROKE}
+        strokeLinecap="round"
+        strokeDasharray={`${dash} ${circumference - dash}`}
+        strokeDashoffset={-(a.bedMin / MINUTES_PER_DAY) * circumference}
+      />
+    );
+  };
+
+  return (
+    <View style={{ width: size, height: size }} accessible accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
+      <Svg width={size} height={size} viewBox={`0 0 ${DIAL_VIEWBOX} ${DIAL_VIEWBOX}`}>
+        {/* Ticks at 0, 6, 12 and 18 o'clock. */}
+        {[0, 1, 2, 3].map((q) => {
+          const angle = (q * Math.PI) / 2;
+          const sin = Math.sin(angle);
+          const cos = Math.cos(angle);
+          return (
+            <Line
+              key={q}
+              x1={center + DIAL_TICK_INNER * sin}
+              y1={center - DIAL_TICK_INNER * cos}
+              x2={center + DIAL_TICK_OUTER * sin}
+              y2={center - DIAL_TICK_OUTER * cos}
+              stroke={colors.inactive}
+              strokeWidth={2}
+              strokeLinecap="round"
+            />
+          );
+        })}
+        <G rotation={-90} origin={`${center}, ${center}`}>
+          <Circle cx={center} cy={center} r={DIAL_RADIUS} fill="none" stroke={colors.track} strokeWidth={DIAL_STROKE} />
+          {backgroundArc && renderArc(backgroundArc, backgroundColor)}
+          {arc && renderArc(arc, color)}
+        </G>
+      </Svg>
+      <View style={styles.center}>
+        <Text style={styles.dialLabel}>{label}</Text>
+        {caption ? <Text style={styles.dialCaption}>{caption}</Text> : null}
+      </View>
+    </View>
+  );
+}
+
 type SegmentProgressProps = {
   total: number;
   done: number;
@@ -338,6 +432,8 @@ const styles = StyleSheet.create({
   donutCaption: { fontFamily: fonts.regular, fontSize: 11, color: colors.textMuted },
   ringLabel: { fontFamily: fonts.extrabold, color: colors.text },
   ringCaption: { fontFamily: fonts.regular, fontSize: 13, color: colors.textMuted },
+  dialLabel: { fontFamily: fonts.extrabold, fontSize: 22, lineHeight: 24, color: colors.text },
+  dialCaption: { fontFamily: fonts.regular, fontSize: 11, color: colors.textMuted },
   segmented: { flexDirection: 'row', backgroundColor: colors.bg, borderRadius: radius.chip, padding: 3 },
   segmentedItem: { flex: 1, borderRadius: radius.tag, paddingVertical: space.xs2 + 1, alignItems: 'center' },
   segmentedItemSelected: { backgroundColor: colors.surface },

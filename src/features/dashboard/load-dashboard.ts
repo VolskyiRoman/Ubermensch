@@ -2,10 +2,11 @@ import { asc, eq } from 'drizzle-orm';
 
 import { db } from '@/db/client';
 import { exercises, habitLogs, habits, sets, workoutItems, workouts } from '@/db/schema';
-import { categoryStreak, perfectDayStreak, workoutStreak, type HabitEntry } from '@/domain/streaks';
+import { categoryStreak, perfectDayStreak, sleepStreak, workoutStreak, type HabitEntry } from '@/domain/streaks';
 import { countSupersets, durationMin, estimateWorkoutMin, latestWeightPr, volume } from '@/domain/stats';
 import { addDays, eachDay, toDateKey } from '@/lib/dates';
 
+import { loadSleepDates } from '../sleep/sleep-repo';
 import type { DailyItem, DashboardData } from './types';
 
 const WEEK_DAYS = 7;
@@ -19,6 +20,7 @@ export function loadDashboard(today: string): DashboardData {
   const workoutRows = db.select().from(workouts).orderBy(asc(workouts.scheduledDate), asc(workouts.id)).all();
   const habitRows = db.select().from(habits).where(eq(habits.archived, false)).all();
   const logRows = db.select().from(habitLogs).where(eq(habitLogs.done, true)).all();
+  const sleepDates = loadSleepDates();
   const setRows = db
     .select({
       weightKg: sets.weightKg,
@@ -42,9 +44,9 @@ export function loadDashboard(today: string): DashboardData {
     createdDate: toDateKey(new Date(h.createdAt)),
   }));
   const workoutEntries = workoutRows.map((w) => ({ date: w.scheduledDate, status: w.status }));
-  const from = [...habitEntries.map((h) => h.createdDate), ...workoutEntries.map((w) => w.date), today].sort()[0];
+  const from = [...habitEntries.map((h) => h.createdDate), ...workoutEntries.map((w) => w.date), ...sleepDates, today].sort()[0];
 
-  const perfect = perfectDayStreak(habitEntries, logRows, workoutEntries, from, today);
+  const perfect = perfectDayStreak(habitEntries, logRows, workoutEntries, from, today, sleepDates);
 
   // Today.
   // A workout in progress (possibly started on another day) takes the place of today's card.
@@ -67,6 +69,8 @@ export function loadDashboard(today: string): DashboardData {
       .filter((h) => toDateKey(new Date(h.createdAt)) <= today)
       .sort((a, b) => categoryOrder[a.category] - categoryOrder[b.category] || a.position - b.position)
       .map((h) => ({ id: `habit-${h.id}`, title: lowerFirst(h.name), category: h.category, done: doneToday.has(h.id) })),
+    // Sleep is expected every day once the first night has been logged.
+    ...(sleepDates.length > 0 ? [{ id: 'sleep', title: 'сон', category: 'sleep' as const, done: sleepDates.includes(today) }] : []),
   ];
 
   // Volume.
@@ -99,7 +103,7 @@ export function loadDashboard(today: string): DashboardData {
       workout: workoutStreak(workoutEntries, today).current,
       habit: categoryStreak('habit', habitEntries, logRows, from, today).current,
       food: categoryStreak('food', habitEntries, logRows, from, today).current,
-      sleep: categoryStreak('sleep', habitEntries, logRows, from, today).current,
+      sleep: sleepStreak(sleepDates, today).current,
     },
     todayWorkout: todayWorkout && {
       id: todayWorkout.id,

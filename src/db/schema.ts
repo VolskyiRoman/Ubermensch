@@ -139,6 +139,13 @@ export const bodyWeight = sqliteTable('body_weight', {
   weightKg: real('weight_kg').notNull(),
 });
 
+/** One night per wake-up date; times are minutes after local midnight. */
+export const sleepLogs = sqliteTable('sleep_logs', {
+  date: text('date').primaryKey(),
+  bedMin: integer('bed_min').notNull(),
+  wakeMin: integer('wake_min').notNull(),
+});
+
 export const settings = sqliteTable('settings', {
   key: text('key').primaryKey(),
   value: text('value').notNull(),

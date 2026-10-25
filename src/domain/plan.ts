@@ -92,6 +92,14 @@ export function moveItem<T extends PlanItem>(items: T[], index: number, directio
   return relabelSupersets(next);
 }
 
+/** Whether `moveItem` would change anything; used to disable the arrow buttons. */
+export function canMoveItem<T extends PlanItem>(items: T[], index: number, direction: -1 | 1): boolean {
+  const target = index + direction;
+  if (!items[index].supersetGroup) return target >= 0 && target < items.length;
+  const { start, end } = blockRange(items, index);
+  return target >= start && target <= end;
+}
+
 /** Changes rounds for a whole superset, or sets for a single exercise. */
 export function setTargetSets<T extends PlanItem>(items: T[], index: number, sets: number): T[] {
   const { start, end } = blockRange(items, index);

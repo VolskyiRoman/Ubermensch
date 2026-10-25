@@ -28,13 +28,13 @@ While a workout is in progress, the Dashboard shows a card that returns to it.
 |---|---|---|
 | Dashboard | `Dashboard.dc.html` | header = today's date (no "Today" title, no streak badge); "Perfect day" hero card with streak number and flame icon; daily donut chart (one segment per daily item); 4 category cards in "done/total" format + per-category streak; today's workout card with "Почати тренування" (Start workout); 7-day volume bars; latest PR; overall counters |
 | Calendar | `Calendar.dc.html`, `CalendarEmpty.dc.html` | month grid; day cells are filled by status: completed — `successSoft` bg / `success` text, planned — `accentSoft` bg / `accentPressed` text, missed — `danger` bg / white text; today — `accent` outline with 2 px offset; tapping a day selects it; selected day shows its workout card or the "День відпочинку" (rest day) placeholder; no Start button here |
-| Habits | `Habits.dc.html`, `HabitsEmpty.dc.html` | week strip with "x/y" per day; sections Habits / Food / Sleep, each with "x/y" and a section streak; row = checkbox + name + meta line; empty state with a sprout illustration |
+| Habits | `Habits.dc.html`, `HabitsEmpty.dc.html` | week strip with "x/y" per day; sections Habits / Food, each with "x/y" and a section streak; row = checkbox + name + meta line; empty state with a sprout illustration |
 | Progress | `Progress.dc.html` | counters; plan completion ring (%); 26-week activity heatmap; workouts & volume per week; per-exercise progress (est. 1RM / max weight / volume); PR list; average duration |
-| Profile | `Profile.dc.html` | body weight + chart + "Записати" (Log) button; default rest (stepper, 15 s step); notification toggles; links to Templates and Exercise library; CSV export |
+| Profile | `Profile.dc.html` | body weight + chart + "Записати" (Log) button; Sleep block: "Додати сон" (Add sleep: bedtime and wake-up, ±15 min or typed), two 24-hour dials — planned schedule and the last logged night (plan shown underneath) with duration and difference from the plan, "Бажаний режим" (desired schedule) row; default rest (stepper, 15 s step); notification toggles; links to Templates and Exercise library; CSV export |
 | Templates | `Templates.dc.html`, `TemplatesEmpty.dc.html` | template list with "Призначити" (Schedule); empty state with a clipboard illustration |
-| New workout | `NewWorkout.dc.html` | name, date, template picker, exercise list, supersets (group A1/A2, rounds, rest after round), exercise search with dropdown, "Create custom exercise", "Save as template" toggle |
+| New workout | `NewWorkout.dc.html` | name, date, template picker, exercise list with ↑↓ on every card to reorder, supersets (group A1/A2, rounds, rest after round), exercise search with dropdown, "Create custom exercise", "Save as template" toggle |
 | Active workout | `Active.dc.html` | exercise progress bar, exercise name, "Last time" hint, current set timer, sets table; buttons "Завершити підхід" (Finish set, primary), "Розминка" (Warm-up), "Завершити вправу" (Finish exercise); "Нотатка" (Note) at top right |
-| Log set | `LogSet.dc.html` | set duration (captured automatically), weight ±2.5, reps ±1, one-tap "Як минулий: W × R" (Same as last), rest after this set (±15 s), "Зберегти і відпочити" (Save and rest) |
+| Log set | `LogSet.dc.html` | set duration (captured automatically), weight ±2.5, reps ±1, one-tap "Як минулий: W × R" (Same as last) that saves the set straight away, rest after this set (±15 s), "Зберегти і відпочити" (Save and rest) |
 | Rest | `Rest.dc.html`, `RestTips.dc.html` | countdown ring, −15 s / +30 s / Skip, next-set card, illustrated tip placeholder (10 variants, "Інша порада" cycles them), tip sits directly on the background (no card) |
 | Summary | `Summary.dc.html` | streak +1; 6 metrics; actual vs planned rest; comparison with the previous identical workout; new PRs; offer to create a template; note; "Готово" (Done) |
 
@@ -60,10 +60,11 @@ workouts(id, name, scheduled_date 'YYYY-MM-DD', template_id NULL, status 'planne
 workout_items(id, workout_id, exercise_id, position, superset_group NULL, target_sets, rest_sec, notes NULL)
 sets(id, workout_item_id, set_index, weight_kg, reps, started_at, ended_at, duration_sec, rest_planned_sec, rest_actual_sec NULL)
 warmups(id, workout_id, started_at, ended_at NULL)
-habits(id, name, category 'habit'|'food'|'sleep', description NULL, position, archived 0|1, created_at)
+habits(id, name, category 'habit'|'food' ('sleep' only on archived legacy rows), description NULL, position, archived 0|1, created_at)
 habit_logs(habit_id, date 'YYYY-MM-DD', done 0|1, PRIMARY KEY(habit_id, date))   -- no row = not done
 body_weight(id, date, weight_kg)
-settings(key PRIMARY KEY, value)   -- default_rest_sec=180, notif_rest=1, notif_workout_day=1
+sleep_logs(date 'YYYY-MM-DD' PRIMARY KEY, bed_min, wake_min)   -- date = wake-up date; times = minutes after midnight
+settings(key PRIMARY KEY, value)   -- default_rest_sec=180, notif_rest=1, notif_workout_day=1, sleep_bed_min=1380, sleep_wake_min=420
 ```
 
 Store dates as local `YYYY-MM-DD`; timestamps as ISO strings or epoch ms.
@@ -73,9 +74,10 @@ Store dates as local `YYYY-MM-DD`; timestamps as ISO strings or epoch ms.
 First, on every app launch (and whenever the day changes): every `workouts` row with `status='planned'` and `scheduled_date < today` → `missed`.
 
 - **Workout streak.** Take scheduled workouts ordered by date; count consecutive `completed` ones going back from the most recent until the first `missed`. Days with no scheduled workout do not break the streak. A workout scheduled for today and not yet done does not break it.
-- **Category streak (habits / food / sleep).** Number of consecutive days on which every active item in the category was checked. Today counts if it is already complete; an incomplete today does not break the streak yet. An item left unchecked on a past day = not done.
+- **Category streak (habits / food).** Number of consecutive days on which every active item in the category was checked. Today counts if it is already complete; an incomplete today does not break the streak yet. An item left unchecked on a past day = not done.
+- **Sleep streak.** Consecutive days (by wake-up date) with a logged night, starting from the first logged night. Tonight not logged yet does not break it.
 - **Per-habit streak** — consecutive days with `done=1`.
-- **Perfect day (overall streak).** A day counts if all habits, food and sleep items are done AND the workout scheduled for that day (if any) is `completed`.
+- **Perfect day (overall streak).** A day counts if all habits and food items are done, the night is logged (once sleep tracking has started) AND the workout scheduled for that day (if any) is `completed`.
 - Keep the best value for every streak (store it or derive it from history).
 
 ## 6. Statistics
@@ -104,7 +106,7 @@ Dashboard & Progress: streaks; daily donut; heatmap (level = day volume, 4 level
 
 ## 8. Export
 
-CSV: workouts, sets, habits, body weight — separate files, via `expo-file-system` + `expo-sharing`.
+CSV: workouts, sets, habits, sleep, body weight — separate files, via `expo-file-system` + `expo-sharing`.
 
 ## 9. Empty states
 

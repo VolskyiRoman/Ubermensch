@@ -8,6 +8,7 @@ import {
   habits,
   sets,
   settings,
+  sleepLogs,
   templateItems,
   templates,
   warmups,
@@ -17,6 +18,8 @@ import {
 import { seedDefaults } from '@/db/seed';
 import { loadSettings, type Settings } from '@/db/settings';
 import { addDays } from '@/lib/dates';
+
+import { loadSleep, type SleepData } from '../sleep/sleep-repo';
 
 const CHART_DAYS = 90;
 
@@ -28,6 +31,7 @@ export type ProfileData = {
   templateCount: number;
   exerciseCount: number;
   settings: Settings;
+  sleep: SleepData;
 };
 
 export function loadProfile(today: string): ProfileData {
@@ -45,6 +49,7 @@ export function loadProfile(today: string): ProfileData {
     templateCount,
     exerciseCount,
     settings: loadSettings(),
+    sleep: loadSleep(),
   };
 }
 
@@ -64,7 +69,7 @@ export function logBodyWeight(date: string, weightKg: number) {
 export function resetAllData() {
   db.transaction((tx) => {
     // Children first, so foreign keys never point at a deleted row.
-    for (const table of [sets, warmups, workoutItems, workouts, templateItems, templates, habitLogs, habits, bodyWeight, settings, exercises]) {
+    for (const table of [sets, warmups, workoutItems, workouts, templateItems, templates, habitLogs, habits, sleepLogs, bodyWeight, settings, exercises]) {
       tx.delete(table).run();
     }
   });

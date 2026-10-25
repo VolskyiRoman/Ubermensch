@@ -13,6 +13,7 @@ import { cancelAllNotifications, ensureNotificationPermission } from '@/lib/noti
 import { colors, fonts, radius, screenPadding, sizes, space } from '@/theme/theme';
 
 import { refreshWorkoutReminders } from '../plan/plan-repo';
+import { SleepCard } from '../sleep/sleep-card';
 import { resetActiveWorkout } from '../workout/active-workout-store';
 import { BodyWeightSheet } from './body-weight-sheet';
 import { exportCsv } from './export-csv';
@@ -53,7 +54,7 @@ function ProfileContent({ data }: { data: ProfileData }) {
   const confirmReset = () => {
     Alert.alert(
       'Скинути всі дані?',
-      'Тренування, шаблони, звички, вага тіла і налаштування будуть видалені назавжди. Це не можна скасувати.',
+      'Тренування, шаблони, звички, сон, вага тіла і налаштування будуть видалені назавжди. Це не можна скасувати.',
       [
         { text: 'Скасувати', style: 'cancel' },
         {
@@ -83,6 +84,7 @@ function ProfileContent({ data }: { data: ProfileData }) {
   return (
     <>
       <BodyWeightCard data={data} />
+      <SleepCard data={data.sleep} />
 
       <Card style={styles.listCard}>
         <View style={styles.settingRow}>

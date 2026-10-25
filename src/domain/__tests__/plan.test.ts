@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { mergeSuperset, moveItem, relabelSupersets, removeItem, setRest, setTargetSets, splitSuperset } from '../plan';
+import { canMoveItem, mergeSuperset, moveItem, relabelSupersets, removeItem, setRest, setTargetSets, splitSuperset } from '../plan';
 
 type Item = { name: string; supersetGroup: string | null; targetSets: number; restSec: number };
 
@@ -84,5 +84,30 @@ describe('setTargetSets / setRest', () => {
 
   it('sets the rest after the round on the last member', () => {
     expect(setRest(items, 1, 60).map((i) => i.restSec)).toEqual([120, 0, 60]);
+  });
+});
+
+describe('canMoveItem', () => {
+  const items = [item('a'), item('b', 'x'), item('c', 'x'), item('d')];
+
+  it('stops a single exercise at the ends of the list', () => {
+    expect(canMoveItem(items, 0, -1)).toBe(false);
+    expect(canMoveItem(items, 0, 1)).toBe(true);
+    expect(canMoveItem(items, 3, 1)).toBe(false);
+    expect(canMoveItem(items, 3, -1)).toBe(true);
+  });
+
+  it('keeps a superset member inside its superset', () => {
+    expect(canMoveItem(items, 1, -1)).toBe(false);
+    expect(canMoveItem(items, 1, 1)).toBe(true);
+    expect(canMoveItem(items, 2, 1)).toBe(false);
+  });
+
+  it('agrees with moveItem', () => {
+    for (let i = 0; i < items.length; i++) {
+      for (const direction of [-1, 1] as const) {
+        expect(canMoveItem(items, i, direction)).toBe(moveItem(items, i, direction) !== items);
+      }
+    }
   });
 });

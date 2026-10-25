@@ -6,6 +6,8 @@ export type Settings = {
   defaultRestSec: number;
   notifRest: boolean;
   notifWorkoutDay: boolean;
+  sleepBedMin: number;
+  sleepWakeMin: number;
 };
 
 type SettingKey = keyof typeof defaultSettings;
@@ -17,6 +19,8 @@ export function loadSettings(): Settings {
     defaultRestSec: Number(values.default_rest_sec),
     notifRest: values.notif_rest === '1',
     notifWorkoutDay: values.notif_workout_day === '1',
+    sleepBedMin: Number(values.sleep_bed_min),
+    sleepWakeMin: Number(values.sleep_wake_min),
   };
 }
 

@@ -38,6 +38,7 @@ export const colors = {
   catHabit: '#141414',
   catFood: '#D98A1C',
   catSleep: '#3B6EA8',
+  catSleepSoft: '#CFDCEC', // planned sleep under the actual night on the sleep dial
 
   heat: ['#EDEDE7', '#F2C3B0', '#E07D57', '#C93C12'] as const, // heatmap levels 0–3
   overlay: 'rgba(20,20,20,0.6)',

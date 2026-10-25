@@ -92,21 +92,47 @@ export function habitStreak(habit: HabitEntry, logs: HabitLogEntry[], today: str
   return dayStreak(habitDayResults([habit], logs, habit.createdDate, today), today);
 }
 
-/** Perfect day: every habit, food and sleep item done, and the day's scheduled workout (if any) completed. */
+/**
+ * Per-day result for sleep, keyed by the wake-up date: complete when the night is logged.
+ * Days before the first logged night are skipped, so tracking starts with the first entry.
+ */
+export function sleepDayResults(dates: string[], from: string, to: string): { date: string; result: DayResult }[] {
+  const logged = new Set(dates);
+  const first = [...dates].sort()[0];
+  return eachDay(from, to).map((date) => ({
+    date,
+    result: first === undefined || date < first ? 'skip' : logged.has(date) ? 'complete' : 'incomplete',
+  }));
+}
+
+/** Consecutive days with a logged night; tonight's missing entry does not break it yet. */
+export function sleepStreak(dates: string[], today: string): Streak {
+  const first = [...dates].sort()[0];
+  if (first === undefined) return { current: 0, best: 0 };
+  return dayStreak(sleepDayResults(dates, first, today), today);
+}
+
+/**
+ * Perfect day: every habit and food item done, the night logged (once sleep tracking started),
+ * and the day's scheduled workout (if any) completed.
+ */
 export function perfectDayStreak(
   habits: HabitEntry[],
   logs: HabitLogEntry[],
   workouts: WorkoutEntry[],
   from: string,
   today: string,
+  sleepDates: string[] = [],
 ): Streak {
   const habitResults = habitDayResults(habits, logs, from, today);
-  const days = habitResults.map(({ date, result }) => {
+  const sleepResults = sleepDayResults(sleepDates, from, today);
+  const days = habitResults.map(({ date, result }, i) => {
+    const sleep = sleepResults[i].result;
     const scheduled = workouts.filter((w) => w.date === date);
-    if (result === 'skip' && scheduled.length === 0) return { date, result: 'skip' as const };
+    if (result === 'skip' && sleep === 'skip' && scheduled.length === 0) return { date, result: 'skip' as const };
     const workoutsDone = scheduled.every((w) => w.status === 'completed');
-    const habitsDone = result !== 'incomplete';
-    return { date, result: habitsDone && workoutsDone ? ('complete' as const) : ('incomplete' as const) };
+    const done = result !== 'incomplete' && sleep !== 'incomplete' && workoutsDone;
+    return { date, result: done ? ('complete' as const) : ('incomplete' as const) };
   });
   return dayStreak(days, today);
 }

@@ -6,7 +6,8 @@ import { weekStart } from '@/domain/progress';
 import { categoryStreak, habitStreak, type HabitEntry } from '@/domain/streaks';
 import { addDays, eachDay, toDateKey } from '@/lib/dates';
 
-export const categoryOrder: HabitCategory[] = ['habit', 'food', 'sleep'];
+// Sleep is tracked in Profile (sleep_logs); old sleep habits were archived by a migration.
+export const categoryOrder: HabitCategory[] = ['habit', 'food'];
 
 export type HabitRow = {
   id: number;

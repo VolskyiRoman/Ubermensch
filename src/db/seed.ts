@@ -8,6 +8,9 @@ export const defaultSettings = {
   default_rest_sec: '180',
   notif_rest: '1',
   notif_workout_day: '1',
+  // Desired sleep schedule, minutes after midnight: 23:00 → 07:00.
+  sleep_bed_min: '1380',
+  sleep_wake_min: '420',
 };
 
 /** Exercise library and default settings; safe to run on every launch. */

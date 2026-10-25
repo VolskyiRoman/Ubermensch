@@ -171,3 +171,16 @@ export function formatSetCount(n: number) {
 export function formatRoundCount(n: number) {
   return `${n} ${pluralUk(n, ['коло', 'кола', 'кіл'])}`;
 }
+
+/** Minutes after midnight as "23:00". */
+export function formatTimeOfDay(min: number) {
+  return `${String(Math.floor(min / 60)).padStart(2, '0')}:${String(min % 60).padStart(2, '0')}`;
+}
+
+/** "7 год 30 хв", "8 год", "45 хв" */
+export function formatHoursMinutesLong(totalMin: number) {
+  const h = Math.floor(totalMin / 60);
+  const m = totalMin % 60;
+  if (h === 0) return `${m} хв`;
+  return m === 0 ? `${h} год` : `${h} год ${m} хв`;
+}
